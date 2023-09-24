@@ -41,8 +41,7 @@
 - 정렬 기준에 따른 장애인 구직 공고 검색 사이트 등
 > ### 역할
 팀장 : 이예림
-<br><br/>
-api-location : 여경호
+api-location : 여경호<br><br/>
 api-hospital : 박민규<br><br/>
 component : 이예림, 최훈, 박유경
 > ### 팀 운영 규칙
