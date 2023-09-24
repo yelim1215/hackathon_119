@@ -42,7 +42,7 @@
 > ### 역할
 팀장 : 이예림
 <br><br/>
-api-location : 여경호<br><br/>
+api-location : 여경호
 api-hospital : 박민규<br><br/>
 component : 이예림, 최훈, 박유경
 > ### 팀 운영 규칙
