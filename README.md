@@ -40,7 +40,7 @@
 - 지도 API를 활용한 여행 코스 공유 커뮤니티 앱
 - 정렬 기준에 따른 장애인 구직 공고 검색 사이트 등
 > ### 역할
-팀장 : 이예림
-api-location : 여경호<br><br/>
-api-hospital : 박민규<br><br/>
-component : 이예림, 최훈, 박유경
+- 팀장 : 이예림
+- api-location : 여경호
+- api-hospital : 박민규
+- component : 이예림, 최훈, 박유경
