@@ -1,7 +1,7 @@
 # hackathon_119
 ### ‘응답하라 119’ : 응급환자 재이송 해결을 위한 응급실 가용 병상 조회 서비스
 ### 금오공과대학교 컴퓨터공학과 & 컴퓨터소프트웨어공학과(WebKit)
-### 개발 환경 : React, styled-components
+개발 환경 : React, styled-components
 
 ------------
 
