@@ -1,7 +1,8 @@
+import { useState } from "react"
 import styled from 'styled-components';
 import './App.css';
 import MainList from './pages/MainList';
-import { Logo, Search } from './components';
+import { Logo, Search, PageToggle } from './components';
 
 
 const AppWrapper = styled.div`
@@ -14,11 +15,14 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
+  const [isMap, setIsMap] = useState(true);
+
   return (
     <AppWrapper>
       <Logo />
       <Search />
-      {/* <MainList /> */}
+      {isMap ? <></> : <><MainList/></>}
+      <PageToggle flag={isMap} setFlag={setIsMap}/>
     </AppWrapper>
   );
 }
