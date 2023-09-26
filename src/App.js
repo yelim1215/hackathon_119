@@ -22,12 +22,8 @@ function App() {
     <AppWrapper>
       <Logo />
       <Search />
-      {isMap ? <></> : <><MainList/></>}
+      {isMap ? <KakaoMap /> : <><MainList/></>}
       <PageToggle flag={isMap} setFlag={setIsMap}/>
-      <h1>
-        응답하라 119
-      </h1>
-      <KakaoMap></KakaoMap>
     </AppWrapper>
   );
 }

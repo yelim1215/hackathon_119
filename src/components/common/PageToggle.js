@@ -7,6 +7,7 @@ const PageSwitchWrapper = styled.div`
     position: absolute;
     top: 90%;
     box-shadow: 3px 3px #CCCCCC;
+    z-index: 5;
 
     > .unchecked {
         color: #5F5F5F;
