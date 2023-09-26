@@ -6,8 +6,10 @@ const PageSwitchWrapper = styled.div`
     display: flex;
     position: absolute;
     top: 90%;
+    box-shadow: 3px 3px #CCCCCC;
 
     > .unchecked {
+        color: #5F5F5F;
         background-color: #B8B8B8;
     }
 
