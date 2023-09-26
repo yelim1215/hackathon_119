@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import './App.css';
-import MapOpen from './components/map/MapOpen';
+import KakaoMap from './components/map/KakaoMap';
 
 
 const AppWrapper = styled.div`
@@ -18,7 +18,7 @@ function App() {
       <h1>
         응답하라 119
       </h1>
-      <MapOpen></MapOpen>
+      <KakaoMap></KakaoMap>
     </AppWrapper>
   );
 }

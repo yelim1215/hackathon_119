@@ -7,7 +7,7 @@ const MapOpenWrapper = styled.div`
 
 const { kakao } = window;
 
-const MapOpen = () => {
+const KakaoMap = () => {
     useEffect(() => {
         const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         const options = { //지도를 생성할 때 필요한 기본 옵션
@@ -16,6 +16,20 @@ const MapOpen = () => {
         };
 
         const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+        // 마커가 표시 될 위치
+        let markerPosition = new kakao.maps.LatLng(
+            37.62197524055062,
+            127.16017523675508
+        )
+
+        // 마커를 생성
+        let marker = new kakao.maps.Marker({
+        position: markerPosition,
+        });
+
+        // 마커를 지도 위에 표시
+        marker.setMap(map);
     }, [])
 
     return (
@@ -25,4 +39,4 @@ const MapOpen = () => {
     );
 }
 
-export default MapOpen;
+export default KakaoMap;
