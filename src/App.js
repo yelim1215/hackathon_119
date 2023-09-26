@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import './App.css';
+import MapOpen from './components/map/MapOpen';
 
 
 const AppWrapper = styled.div`
@@ -17,6 +18,7 @@ function App() {
       <h1>
         응답하라 119
       </h1>
+      <MapOpen></MapOpen>
     </AppWrapper>
   );
 }
