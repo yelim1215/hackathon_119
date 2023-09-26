@@ -13,6 +13,9 @@ const SearchWrapper = styled.div`
     margin-bottom: 0.5rem;
     box-shadow: 3px 3px #CCCCCC;
     border: 1px solid black;
+    z-index: 5;
+    position: absolute;
+    top: 15%;
 `
 
 const InputText = styled.input`

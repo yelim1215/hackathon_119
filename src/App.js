@@ -1,8 +1,7 @@
 import { useState } from "react"
 import styled from 'styled-components';
 import './App.css';
-import MainList from './pages/MainList';
-import { Logo, Search, PageToggle } from './components';
+import { Logo, Search, PageToggle, List } from './components';
 import KakaoMap from './components/map/KakaoMap';
 
 
@@ -22,7 +21,7 @@ function App() {
     <AppWrapper>
       <Logo />
       <Search />
-      {isMap ? <KakaoMap /> : <><MainList/></>}
+      {isMap ? <KakaoMap /> : <><List /></>}
       <PageToggle flag={isMap} setFlag={setIsMap}/>
     </AppWrapper>
   );
