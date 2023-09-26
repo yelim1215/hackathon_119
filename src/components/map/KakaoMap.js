@@ -1,42 +1,61 @@
-import styled from "styled-components"
-import React, { useEffect } from "react";
-
-const MapOpenWrapper = styled.div`
-
-`
-
+import React, { useEffect, useState, useMemo } from "react";
 const { kakao } = window;
 
 const KakaoMap = () => {
-    useEffect(() => {
-        const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        const options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-        level: 3 //지도의 레벨(확대, 축소 정도)
-        };
+  // 현재위치 담는 곳
+  const [location, setLocation] = useState("");
+  const [map, setMap] = useState();
 
-        const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+  // 현재위치 세부조정
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
 
-        // 마커가 표시 될 위치
-        let markerPosition = new kakao.maps.LatLng(
-            37.62197524055062,
-            127.16017523675508
-        )
+  // 현재 위치 가져오기
+  useMemo(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    }
 
-        // 마커를 생성
-        let marker = new kakao.maps.Marker({
-        position: markerPosition,
-        });
+    function success(position) {
+      setLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    }
 
-        // 마커를 지도 위에 표시
-        marker.setMap(map);
-    }, [])
+    function error() {
+      setLocation({
+        latitude: 33.450701,
+        longitude: 126.570667,
+      });
+      console.log("위치 받기 실패");
+    }
+  }, [navigator.geolocation.getCurrentPosition]);
 
-    return (
-        <MapOpenWrapper>
-            <div id="map" style={{width:"500px", height:"400px"}}></div>
-        </MapOpenWrapper>
-    );
+  // 카카오지도 API 가져오기
+  const kakaoMap = () => {
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(location.latitude, location.longitude),
+      level: 7,
+    };
+    setMap(new kakao.maps.Map(container, options));
+  };
+
+  // 화면에 랜더링
+  useEffect(() => {
+    kakaoMap();
+    console.log(location);
+  }, [location]);
+
+  return (
+    <>
+      <div id="map" style={{ width: "100vw", height: "100vh" }}></div>
+    </>
+  );
 }
 
 export default KakaoMap;
