@@ -42,6 +42,9 @@ const KakaoMap = () => {
     const mapOptions = {
       center: new kakao.maps.LatLng(location.latitude, location.longitude),
       level: 7,
+    //   draggable: true, // 드래그 활성화
+    //   disableDoubleClick: false, // 더블 클릭 활성화
+    //   disableTouchZoom: false, // 터치 제스처 활성화
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
@@ -83,7 +86,7 @@ const KakaoMap = () => {
 
   return (
     <>
-      <div id="map" style={{ width: "100%", height: "70vh" }}></div>
+      <div id="map" style={{ width: "100%", height: "100vh" }}></div>
     </>
   );
 }
