@@ -45,18 +45,9 @@ const ToggleButton = styled.button`
   justify-items: center;
 `;
 
-export const Drawer = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleDrawer = () => {
-        setIsOpen(!isOpen);
-    };
-
+export const Drawer = ({isOpen, toggleDrawer}) => {
     return (
         <div>
-            <ToggleButton onClick={toggleDrawer}>
-                {isOpen ? '닫기' : '열기'}
-            </ToggleButton>
             <Overlay isOpen={isOpen} onClick={toggleDrawer} />
             <DrawerContainer isOpen={isOpen}>
                 <DrawerContent>
@@ -66,9 +57,9 @@ export const Drawer = () => {
                     <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }}/>
 
                 </DrawerContent>
-                <ToggleButton onClick={toggleDrawer}>
+                {/* <ToggleButton onClick={toggleDrawer}>
                     {isOpen ? '닫기' : '열기'}
-                </ToggleButton>
+                </ToggleButton> */}
             </DrawerContainer>
         </div>
     )

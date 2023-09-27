@@ -33,9 +33,9 @@ const HospitalLocation = styled.p`
     margin-top: -1rem;
 `
 
-const ListElement = () => {
+const ListElement = ({ toggleDrawer }) => {
     return (<ElementWrapper>
-        <InfoWrapper>
+        <InfoWrapper onClick={() => toggleDrawer()}>
             <HospitalName>순천향대학교부속구미병원</HospitalName>
             <HospitalLocation>1.7km</HospitalLocation>
         </InfoWrapper>
