@@ -1,23 +1,17 @@
 // Action types
-export const TAB_TOGGLE = 'TAB_TOGGLE';
-export const TAB_OPENED = 'TAB_OPENED';
-export const TAB_CLOSED = 'TAB_CLOSED';
+export const IS_MAP =  'IS_MAP'
+export const IS_TAB_OPEN = 'IS_TAB_OPEN'
 
 // Action creators
-export const tabToggle = () => {
+export const isMap = () => {
     return {
-        type: TAB_TOGGLE,
+        type: IS_MAP,
     }
 }
 
-export const tabOpened = () => {
+export const isTabOpen = () => {
     return {
-        type: TAB_OPENED,
+        type: IS_TAB_OPEN,
     }
 }
 
-export const tabClosed = () => {
-    return {
-        type: TAB_CLOSED,
-    }
-}

@@ -1,5 +1,8 @@
 import styled from "styled-components"
 
+import { useDispatch } from "react-redux";
+import * as Action from "../../redux/Action";
+
 const PageSwitchWrapper = styled.div`
     width: 60%;
     height: 5%;
@@ -35,14 +38,17 @@ const ListViewBtn = styled.div`
 
 `
 
-const PageSwitch = ({ flag, setFlag }) => {
+const PageSwitch = ({ flag }) => {
+    const dispatch = useDispatch();
+
+
     return (<PageSwitchWrapper>
         <PageBtn 
             className={flag ? 'checked' : 'unchecked'}
-            onClick={() => setFlag(true)}>지도로 보기</PageBtn>
+            onClick={() => dispatch(Action.isMap())}>지도로 보기</PageBtn>
         <PageBtn 
             className={flag ? 'unchecked' : 'checked'}
-            onClick={() => setFlag(false)}>목록으로 보기</PageBtn>
+            onClick={() => dispatch(Action.isMap())}>목록으로 보기</PageBtn>
     </PageSwitchWrapper>);
 }
 

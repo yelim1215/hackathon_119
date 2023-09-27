@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from "react-redux";
+import * as Action from "../redux/Action";
 import Icon from './common/Icon';
 import { FirstSection, SecondSection, ThirdSection } from './Section';
 
@@ -45,11 +47,12 @@ const ToggleButton = styled.button`
   justify-items: center;
 `;
 
-export const Drawer = ({isOpen, toggleDrawer}) => {
+export const Drawer = ({ flag }) => {
+  const dispatch = useDispatch();
     return (
         <div>
-            <Overlay isOpen={isOpen} onClick={toggleDrawer} />
-            <DrawerContainer isOpen={isOpen}>
+        <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
+        <DrawerContainer isOpen={flag}>
                 <DrawerContent>
                     {/* Detail 내용 */}
                     <FirstSection />

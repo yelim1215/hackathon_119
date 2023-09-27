@@ -1,9 +1,9 @@
-import { useState } from "react"
 import styled from 'styled-components';
 import './App.css';
-import { Logo, Search, PageToggle, List } from './components';
+import { Logo, Search, PageToggle, List, Drawer } from './components';
 import KakaoMap from './components/map/KakaoMap';
 
+import { useSelector } from "react-redux";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -15,14 +15,16 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
-  const [isMap, setIsMap] = useState(true);
+  const isMap = useSelector((state) => state.isMap);
+  const isTabOpen = useSelector((state) => state.isTabOpen);
 
   return (
     <AppWrapper>
       <Logo />
       <Search />
       {isMap ? <KakaoMap /> : <><List /></>}
-      <PageToggle flag={isMap} setFlag={setIsMap}/>
+      <PageToggle flag={isMap}/>
+      <Drawer flag={isTabOpen} />
     </AppWrapper>
   );
 }
