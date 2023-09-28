@@ -6,7 +6,7 @@ const IconContainer = styled.div`
   justify-self: center;
 `
 
-const IconImage = styled.div`
+export const IconImage = styled.div`
   background-image: url(${(props) => props.imageUrl});
   background-repeat: no-repeat;
   background-size: contain; /* 이미지를 fit하게 설정 */
@@ -20,11 +20,16 @@ const IconText = styled.div`
   font-size: 14px;
 `
 
+const CustomBar = styled.progress`
+width: -webkit-fill-available;
+`
+
 const Icon = ({ imageUrl, text }) => {
     return (
         <IconContainer>
             <IconImage imageUrl={imageUrl} />
             <IconText>{text}</IconText>
+            <CustomBar value="50" min="0" max="100" />
         </IconContainer>
     );
 }
