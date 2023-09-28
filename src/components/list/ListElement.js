@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { useDispatch } from "react-redux";
+import * as Action from "../../redux/Action";
 
 const ElementWrapper = styled.div`
     width: 85%;
@@ -33,9 +35,11 @@ const HospitalLocation = styled.p`
     margin-top: -1rem;
 `
 
-const ListElement = ({ toggleDrawer }) => {
+const ListElement = () => {
+    const dispatch = useDispatch();
+
     return (<ElementWrapper>
-        <InfoWrapper onClick={() => toggleDrawer()}>
+        <InfoWrapper onClick={() => dispatch(Action.isTabOpen())}>
             <HospitalName>순천향대학교부속구미병원</HospitalName>
             <HospitalLocation>1.7km</HospitalLocation>
         </InfoWrapper>
