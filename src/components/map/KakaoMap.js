@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import pinImage from './pin.png';
 const { kakao } = window;
 
 const KakaoMap = () => {
@@ -48,6 +49,12 @@ const KakaoMap = () => {
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
+    // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
+    const imageSrc = pinImage;
+    const imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기
+    const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
     // 마커 생성
     const markerOptions = [
         {
@@ -57,12 +64,21 @@ const KakaoMap = () => {
         {
             position: new kakao.maps.LatLng(36.114986, 128.340695),
             text: "치의과대학교 구미차병원",
+            image: markerImage,
         },
     ];
     
     // const markerInstance = new kakao.maps.Marker(markerOptions);
     const markers = markerOptions.map((option) => {
-        return new kakao.maps.Marker(option);
+      const marker = new kakao.maps.Marker(option);
+
+      // 마커 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, 'click', function() {
+          console.log('마커가 클릭되었습니다.');
+          // 상세창으로 연결시키기
+      });
+  
+      return marker;
     });
 
     // 마커를 지도에 추가
