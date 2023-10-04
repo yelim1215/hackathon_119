@@ -41,7 +41,7 @@ const KakaoMap = () => {
     const container = document.getElementById("map");
     const mapOptions = {
       center: new kakao.maps.LatLng(location.latitude, location.longitude),
-      level: 7,
+      level: 9,
     //   draggable: true, // 드래그 활성화
     //   disableDoubleClick: false, // 더블 클릭 활성화
     //   disableTouchZoom: false, // 터치 제스처 활성화
@@ -66,10 +66,24 @@ const KakaoMap = () => {
     });
 
     // 마커를 지도에 추가
-    // markers.setMap(mapInstance);
     markers.forEach((marker) => {
         marker.setMap(mapInstance);
     });
+
+    // 지도에 표시할 원을 생성합니다
+    var circle = new kakao.maps.Circle({
+      center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표 입니다 
+      radius: 10000, // 미터 단위의 원의 반지름입니다 
+      strokeWeight: 1, // 선의 두께입니다 
+      strokeColor: '#3C4FFF', // 선의 색깔입니다
+      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+      strokeStyle: 'dashed', // 선의 스타일 입니다
+      fillColor: '#CFE7FF', // 채우기 색깔입니다
+      fillOpacity: 0.3  // 채우기 불투명도 입니다   
+    }); 
+
+    // 지도에 원을 표시합니다 
+    circle.setMap(mapInstance); 
 
     // 마커 상태 업데이트
     setMarker(markers);
