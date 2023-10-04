@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import pinImage from './pin.png';
+import currentImage from './current.png';
 import pinRedImage from './pin_red.png';
 import pinYellowImage from './pin_yellow.png';
 import pinGreenImage from './pin_green.png';
@@ -58,8 +59,18 @@ const KakaoMap = () => {
     const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
+    const imageSrcCur = currentImage;
+    const imageSizeCur = new kakao.maps.Size(25, 25); // 마커이미지의 크기
+    const imageOptionCur = {offset: new kakao.maps.Point(25/2, 25)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImageCur = new kakao.maps.MarkerImage(imageSrcCur, imageSizeCur, imageOptionCur);
+
     // 마커 생성
     const markerOptions = [
+        {
+          position: new kakao.maps.LatLng(location.latitude, location.longitude),
+          text: "현 위치",
+          image: markerImageCur,
+        },
         {
             position: new kakao.maps.LatLng(36.103156, 128.382649),
             text: "순천향대학교부속구미병원",
@@ -89,19 +100,31 @@ const KakaoMap = () => {
         marker.setMap(mapInstance);
     });
 
-    // 지도에 표시할 원을 생성합니다
+    const iwContent = `<div style="width: 100%; padding:5px; background-color: #FFB890;">Hello World!</div>`;
+    const iwPosition = new kakao.maps.LatLng(36.103156, 128.382649);
+
+    // 인포윈도우 생성
+    const infowindow = new kakao.maps.InfoWindow({
+        position : iwPosition, 
+        content : iwContent,
+    });
+      
+    // 마커 위에 인포윈도우 표시
+    infowindow.open(mapInstance, markers[1]); // 표시할 마커 임시 지정
+
+    // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
-      center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표 입니다 
-      radius: 10000, // 미터 단위의 원의 반지름입니다 
-      strokeWeight: 1, // 선의 두께입니다 
-      strokeColor: '#3C4FFF', // 선의 색깔입니다
-      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-      strokeStyle: 'dashed', // 선의 스타일 입니다
-      fillColor: '#CFE7FF', // 채우기 색깔입니다
-      fillOpacity: 0.3  // 채우기 불투명도 입니다   
+      center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
+      radius: 10000, // 미터 단위의 원 반지름
+      strokeWeight: 1, // 선의 두께 
+      strokeColor: '#3C4FFF', // 선의 색깔
+      strokeOpacity: 0.7, // 선의 불투명도 1~0 사이의 값. 0에 가까울수록 투명
+      strokeStyle: 'dashed', // 선의 스타일
+      fillColor: '#CFE7FF', // 채우기 색깔
+      fillOpacity: 0.3  // 채우기 불투명도 
     }); 
 
-    // 지도에 원을 표시합니다 
+    // 지도에 원 표시
     circle.setMap(mapInstance); 
 
     // 마커 상태 업데이트
