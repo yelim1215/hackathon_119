@@ -70,7 +70,15 @@ const KakaoMap = () => {
     
     // const markerInstance = new kakao.maps.Marker(markerOptions);
     const markers = markerOptions.map((option) => {
-        return new kakao.maps.Marker(option);
+      const marker = new kakao.maps.Marker(option);
+
+      // 마커 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, 'click', function() {
+          console.log('마커가 클릭되었습니다.');
+          // 상세창으로 연결시키기
+      });
+  
+      return marker;
     });
 
     // 마커를 지도에 추가
