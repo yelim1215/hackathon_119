@@ -4,6 +4,11 @@ import currentImage from './current.png';
 import pinRedImage from './pin_red.png';
 import pinYellowImage from './pin_yellow.png';
 import pinGreenImage from './pin_green.png';
+
+// redux
+import { useDispatch } from "react-redux";
+import * as Action from "../../redux/Action";
+
 const { kakao } = window;
 
 const KakaoMap = () => {
@@ -11,6 +16,9 @@ const KakaoMap = () => {
   const [location, setLocation] = useState("");
   const [map, setMap] = useState();
   const [marker, setMarker] = useState(null); // 마커 상태 추가
+
+  // redux
+  const dispatch = useDispatch();
 
   // 현재위치 세부조정
   var options = {
@@ -90,6 +98,8 @@ const KakaoMap = () => {
       kakao.maps.event.addListener(marker, 'click', function() {
           console.log('마커가 클릭되었습니다.');
           // 상세창으로 연결시키기
+          dispatch(Action.isTabOpen());
+          
       });
   
       return marker;
