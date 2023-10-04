@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import pinImage from './pin.png';
 import currentImage from './current.png';
+import pinRedImage from './pin_red.png';
+import pinYellowImage from './pin_yellow.png';
+import pinGreenImage from './pin_green.png';
 const { kakao } = window;
 
 const KakaoMap = () => {
@@ -50,7 +53,8 @@ const KakaoMap = () => {
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
-    const imageSrc = pinImage;
+    // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
+    const imageSrc = pinGreenImage;
     const imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기
     const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -108,7 +112,7 @@ const KakaoMap = () => {
     // 마커 위에 인포윈도우 표시
     infowindow.open(mapInstance, markers[1]); // 표시할 마커 임시 지정
 
-    // 지도에 표시할 원을 생성합니다
+    // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
       radius: 10000, // 미터 단위의 원 반지름
