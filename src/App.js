@@ -1,31 +1,42 @@
-import logo from "./logo.svg";
+import styled from "styled-components";
 import "./App.css";
-import { CallAvail_beds } from "./api_service/apiService";
+import { Logo, Search, PageToggle, List, Drawer } from "./components";
+import KakaoMap from "./components/map/KakaoMap";
+
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { CallAvail_beds, CallDetails } from "./api_service/apiService";
+
+const AppWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffddce;
+`;
 
 function App() {
-  //api 호출 확인
   useEffect(() => {
+    CallDetails();
     CallAvail_beds();
   }, []);
+  const isMap = useSelector((state) => state.isMap);
+  const isTabOpen = useSelector((state) => state.isTabOpen);
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. hoon
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      <Logo />
+      <Search />
+      {isMap ? (
+        <KakaoMap />
+      ) : (
+        <>
+          <List />
+        </>
+      )}
+      <PageToggle flag={isMap} />
+      <Drawer flag={isTabOpen} />
+    </AppWrapper>
   );
 }
-
 export default App;

@@ -4,6 +4,7 @@ const API_URL = "ErmctInfoInqireService";
 // 병원 응급실 실시간 가용병상정보 조회 오퍼레이션
 const NO_1 = "/getEmrrmRltmUsefulSckbdInfoInqire";
 // service key
+const NO_5 = "/getEgytBassInfoInqire";
 const API_KEY =
   "7eTdXpvji1tanllfyqPZ%2BMsf%2BM1v1gTbz4N0dsNyFEhV17ahp%2F2n1LYqSMy129Jjc5BTFnNo8vVRYlJOgKzsBw%3D%3D";
 
@@ -45,12 +46,12 @@ function check(a) {
   } else return num;
 }
 
+// 가용병상 데이터
 export function CallAvail_beds() {
-  // 가용병상 데이터
   let avail_beds = [];
   let temp = [];
   var xml2json = new XMLtoJSON();
-  const url = `${API_URL}${NO_1}?serviceKey=${API_KEY}&pageNo=1&numOfRows=102`; // 데이터 개수 총 412개 (실행 속도를 위해 줄임)
+  const url = `${API_URL}${NO_1}?serviceKey=${API_KEY}&pageNo=1&numOfRows=142`; // 데이터 개수 총 412개 (실행 속도를 위해 줄임)
   return fetch(url, {
     method: "GET",
   })
@@ -74,7 +75,6 @@ export function CallAvail_beds() {
         }
         temp.push(result);
       });
-      console.log(temp);
 
       // hvs03, hv29	응급실 음압 격리 병상_기준          hv01
       // hvs04, hv30	응급실 일반 격리 병상_기준          hv02
@@ -88,8 +88,7 @@ export function CallAvail_beds() {
       // hvs53, hv21	[응급전용] 입원실 일반격리_기준     hv10
       temp.forEach((data) => {
         let item = {};
-        item.dutyname = data.dutyName;
-        item.dutytel3 = data.dutyTel3;
+        item.dutyname = data.dutyName; //기관명
         item.hv01 = sum(data.hvs03, data.hv29); //응급실 음압 격리 병상
         item.hv02 = sum(data.hvs04, data.hv30); //응급실 일반 격리 병상
         item.hv03 = check(data.hvs05); // [응급전용] 중환자실_기준
@@ -102,6 +101,51 @@ export function CallAvail_beds() {
         item.hv10 = sum(data.hvs53, data.hv21); //[응급전용] 일반격리_기준
         avail_beds.push(item);
       });
+      avail_beds.sort();
       console.log(avail_beds);
+    });
+}
+
+//주소 및 진료 과목
+export function CallDetails() {
+  let details = [];
+  let temp = [];
+  var xml2json = new XMLtoJSON();
+  const url = `${API_URL}${NO_5}?serviceKey=${API_KEY}&pageNo=1&numOfRows=142`; // 데이터 개수 총 412개 (실행 속도를 위해 줄임)
+  return fetch(url, {
+    method: "GET",
+  })
+    .then((response) => response.text())
+    .then((response) => {
+      var objson = xml2json.fromStr(response); // object 형식
+
+      objson.response.body.items.item.forEach((data) => {
+        let result = {};
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const textValue = data[key]["#text"];
+            result[key] = textValue;
+          }
+        }
+        temp.push(result);
+      });
+
+      temp.forEach((data) => {
+        let item = {};
+        item.dutyname = data.dutyName; //기관명
+        item.dutyTel1 = data.dutyTel1; //대표전화
+        item.dutyTel3 = data.dutyTel3; //응급실전화 (없으면 응급실 X)
+        item.dgidIdName = data.dgidIdName; //  진료과목
+        item.dutyAddr = data.dutyAddr; // 주소
+        item.dutyTime1s = data.dutyTime1s; // 평일 오픈시간
+        item.dutyTime1c = data.dutyTime1c; // 평일 마감시간
+        item.dutyTime6s = data.dutyTime6s; // 토욜 오픈시간
+        item.dutyTime6c = data.dutyTime6c; // 토욜 마감시간
+        item.dutyHayn = data.dutyHayn; //입원실 가용여부
+        item.dutyHano = data.dutyHano; //병상수
+        item.dutyEryn = data.dutyEryn; // 응급실 운영여부 => 1 운영 , 2 운영X
+        details.push(item);
+      });
+      console.log(details);
     });
 }
