@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import pinImage from './pin.png';
+import pinRedImage from './pin_red.png';
+import pinYellowImage from './pin_yellow.png';
+import pinGreenImage from './pin_green.png';
 const { kakao } = window;
 
 const KakaoMap = () => {
@@ -50,7 +53,7 @@ const KakaoMap = () => {
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
     // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
-    const imageSrc = pinImage;
+    const imageSrc = pinGreenImage;
     const imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기
     const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
