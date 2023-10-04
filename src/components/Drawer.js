@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import * as Action from "../redux/Action";
 import { IconImage } from './common/Icon';
 import { FirstSection, SecondSection, ThirdSection } from './Section';
+import { CallAvail_beds, CallDetails } from '../api_service/apiService';
 
 const DrawerContainer = styled.div`
   position: fixed;
@@ -60,25 +61,29 @@ const CustomBtn = styled.button`
 `
 
 export const Drawer = ({ flag }) => {
-    const dispatch = useDispatch();
-    return (
-        <div>
-            <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
-            <DrawerContainer isOpen={flag}>
-                <DrawerContent>
-                    {/* Detail 내용 */}
-                    <FirstSection />
-                    <SecondSection text="진료과목" style={{ borderTop: '1px solid #ccc' }} />
-                    <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }} />
+  const dispatch = useDispatch();
 
-                </DrawerContent>
+  CallDetails().then((data) => {
+    console.log(data);
+  });
+return (
+  <div>
+    <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
+    <DrawerContainer isOpen={flag}>
+      <DrawerContent>
+        {/* Detail 내용 */}
+        <FirstSection />
+        <SecondSection text="진료과목" style={{ borderTop: '1px solid #ccc' }} />
+        <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }} />
 
-                <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
-                    <IconImage style={{ width: "30px", height: "30px" }} imageUrl={"assets/cancel.png"} />
-                </CustomBtn>
+      </DrawerContent>
 
-            </DrawerContainer>
+      <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
+        <IconImage style={{ width: "30px", height: "30px" }} imageUrl={"assets/cancel.png"} />
+      </CustomBtn>
 
-        </div>
-    )
+    </DrawerContainer>
+
+  </div>
+)
 }
