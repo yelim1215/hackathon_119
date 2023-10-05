@@ -3,6 +3,7 @@ import * as Action from './Action'
 const initialState = {
     isMap: true, 
     isTabOpen: false,
+    isSearchTabOpen: false,
     keyword: '',
     // 10: 시/도, 8: 시/군/구, 6: 읍/면/동
     option: 8,
@@ -24,6 +25,13 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 isTabOpen: !state.isTabOpen,
+            }
+        }
+        case Action.IS_SEARCH_TAB_OPEN: {
+            console.log(state);
+            return {
+                ...state,
+                isSearchTabOpen: !state.isSearchTabOpen,
             }
         }
         case Action.INPUT_KEYWORD: {
