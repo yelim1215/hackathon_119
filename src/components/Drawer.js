@@ -89,7 +89,7 @@ export const Drawer = ({ flag }) => {
             <>
               <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tell={data[0].dutyTel1} />
               <SecondSection text="진료과목" sub={data[0].dgidIdName} style={{ borderTop: '1px solid #ccc' }} />
-              <ThirdSection text="실시간병상정보"  style={{ borderTop: '1px solid #ccc' }} />
+              <ThirdSection text="실시간병상정보 test"  style={{ borderTop: '1px solid #ccc' }} />
             </>
           )}
         </DrawerContent>
