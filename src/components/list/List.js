@@ -9,7 +9,7 @@ const ListWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
-    top: 20%;
+    top: 24%;
 `;
 
 export default function List() {
