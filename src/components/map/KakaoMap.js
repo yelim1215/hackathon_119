@@ -61,7 +61,6 @@ const KakaoMap = () => {
     //   disableTouchZoom: false, // 터치 제스처 활성화
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
-    console.log('중앙', mapInstance.getCenter());
 
     // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
     const imageSrc = pinGreenImage;
@@ -122,7 +121,7 @@ const KakaoMap = () => {
     });
       
     // 마커 위에 인포윈도우 표시
-    infowindow.open(mapInstance, markers[1]); // 표시할 마커 임시 지정
+    infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
 
     
 

@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
 import { useEffect } from "react";
 
-const { kakao } = window;
-const ps = new kakao.maps.services.Places();
+// const { kakao } = window;
+// const ps = new kakao.maps.services.Places();
 
 const SearchWrapper = styled.div`
     width: 90%;
@@ -48,26 +48,26 @@ const SearchResultWrapper = styled.div`
     background-color: white;
 `
 
-const findSearch = (keyword, callback) => {
-    ps.keywordSearch(keyword, callback);
-}
+// const findSearch = (keyword, callback) => {
+//     ps.keywordSearch(keyword, callback);
+// }
 
 const Search = () => {
     const keyword = useSelector((state) => state.keyword);
     const dispatch = useDispatch();
 
-    const placesSearchCB = (data, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-            return data;
+    // const placesSearchCB = (data, status) => {
+    //     if (status === kakao.maps.services.Status.OK) {
+    //         return data;
 
-        } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-            return false;
+    //     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+    //         return false;
 
-        } else if (status === kakao.maps.services.Status.ERROR) {
-            return false;
+    //     } else if (status === kakao.maps.services.Status.ERROR) {
+    //         return false;
 
-        }
-    }
+    //     }
+    // }
 
     return (<>
     <SearchWrapper>
@@ -76,11 +76,11 @@ const Search = () => {
         <SearchImage onClick={() => console.log('검색')}/>
     </SearchWrapper>
         <RadiusBtn/>
-        <SearchResultWrapper>
+        {/* <SearchResultWrapper>
         {
             keyword !== '' ? findSearch(keyword, placesSearchCB) : <></>
         }
-        </SearchResultWrapper>
+        </SearchResultWrapper> */}
     </>);
     
 }
