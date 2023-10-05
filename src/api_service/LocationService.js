@@ -1,36 +1,14 @@
-import {Locution} from "../domain/Locution";
+class LocationService{
 
-const {kakao} = window
-
-class LocationService {
-
-    geocoder = new kakao.maps.services.Geocoder();
-
-    getCurrentLocation = ()=>{
-        return new Promise((resolve)=>{
-            navigator.geolocation.getCurrentPosition((position)=>{
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-
-                this.geocoder.coord2RegionCode(lng, lat, (result, status) => {
-                    if (status === kakao.maps.services.Status.OK) {
-                        resolve(
-                            new Locution(
-                                lat,
-                                lng,
-                                result[0].address_name,
-                                result[0].region_1depth_name,
-                                result[0].region_2depth_name
-                            )
-                        )
-                    }
-                })
-            })
+    getCurrentLocation = () => {
+        return navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            return new Location(lat, lng)
         })
-    }
 
+    }
 }
 
 const locationService = new LocationService();
-
-export default locationService;
+export default locationService
