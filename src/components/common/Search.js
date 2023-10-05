@@ -75,7 +75,6 @@ const Search = () => {
         value={keyword} onChange={(e) => dispatch(Action.inputKeyword(e.target.value))}/>
         <SearchImage onClick={() => console.log('검색')}/>
     </SearchWrapper>
-        <RadiusBtn/>
         {/* <SearchResultWrapper>
         {
             keyword !== '' ? findSearch(keyword, placesSearchCB) : <></>

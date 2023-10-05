@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import './App.css';
-import { Logo, Search, PageToggle, List, Drawer } from './components';
+import { Logo, Search, RadiusBtn, PageToggle, List, Drawer } from './components';
 import KakaoMap from './components/map/KakaoMap';
 
 import { useSelector } from "react-redux";
@@ -20,9 +20,8 @@ function App() {
 
   return (
     <AppWrapper>
-      <Logo />
-      <Search />
-      {isMap ? <KakaoMap /> : <><List /></>}
+      <Logo />    
+      {isMap ? <><Search /><RadiusBtn /><KakaoMap /></> : <><Search /><List /></>}
       <PageToggle flag={isMap}/>
       <Drawer flag={isTabOpen} />
     </AppWrapper>
