@@ -9,6 +9,7 @@ const initialState = {
     option: 8,
     // in: 내과, out: 외과, baby: 소아과
     searchOpt: {inhos: false, outhos: false, babyhos: false},
+    currLoc: { lat: 33.450701, lon: 126.570667 },
 }
 
 const reducers = (state = initialState, action) => {
@@ -64,6 +65,12 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 searchOpt: { ...state.searchOpt, babyhos: !state.searchOpt.babyhos },
+            }
+        }
+        case Action.CURR_LOC: {
+            return {
+                ...state,
+                currLoc: {lat: action.lat, lon: action.lon},
             }
         }
         default: {

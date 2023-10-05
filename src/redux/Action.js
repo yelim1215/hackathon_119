@@ -11,6 +11,9 @@ export const TOGGLE_IN = 'TOGGLE_IN'
 export const TOGGLE_OUT = 'TOGGLE_OUT'
 export const TOGGLE_BABY = 'TOGGLE_BABY'
 
+// 지도 위치 관련 상태
+export const CURR_LOC = 'CURR_LOC'
+
 // Action creators
 export const isMap = () => {
     return {
@@ -59,6 +62,14 @@ export const toggleOut = () => {
 export const toggleBaby = () => {
     return {
         type: TOGGLE_BABY,
+    }
+}
+
+export const currLoc = (lat, lon) => {
+    return {
+        type: CURR_LOC,
+        lat: lat,
+        lon: lon,
     }
 }
 
