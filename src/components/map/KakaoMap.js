@@ -63,11 +63,15 @@ const KakaoMap = () => {
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
-    // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
-    const imageSrc = pinGreenImage;
-    const imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기
-    const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    const imageSrcGreen = pinGreenImage;
+    const imageSizeGreen = new kakao.maps.Size(35, 35); // 마커이미지의 크기
+    const imageOptionGreen = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImageGreen = new kakao.maps.MarkerImage(imageSrcGreen, imageSizeGreen, imageOptionGreen);
+
+    const imageSrcRed = pinRedImage;
+    const imageSizeRed = new kakao.maps.Size(35, 35); // 마커이미지의 크기
+    const imageOptionRed = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImageRed = new kakao.maps.MarkerImage(imageSrcRed, imageSizeRed, imageOptionRed);
 
     const imageSrcCur = currentImage;
     const imageSizeCur = new kakao.maps.Size(25, 25); // 마커이미지의 크기
@@ -82,13 +86,14 @@ const KakaoMap = () => {
           image: markerImageCur,
         },
         {
-            position: new kakao.maps.LatLng(36.103156, 128.382649),
-            text: "순천향대학교부속구미병원",
+            position: new kakao.maps.LatLng(37.540651, 127.071973),
+            text: "건국대학교병원",
+            image: markerImageRed,
         },
         {
-            position: new kakao.maps.LatLng(36.114986, 128.340695),
-            text: "치의과대학교 구미차병원",
-            image: markerImage,
+            position: new kakao.maps.LatLng(37.535496, 127.083515),
+            text: "혜민병원",
+            image: markerImageGreen,
         },
     ];
     
@@ -129,21 +134,10 @@ const KakaoMap = () => {
     `;
     const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
 
-    // // 인포윈도우 생성
-    // const infowindow = new kakao.maps.InfoWindow({
-    //     position : iwPosition, 
-    //     content : iwContent,
-    // });
-      
-    // // 마커 위에 인포윈도우 표시
-    // infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
-
     // 커스텀 오버레이 생성
     const customOverlay = new kakao.maps.CustomOverlay({
       position: iwPosition,
       content: iwContent,
-      // xAnchor: 0.3,
-      // yAnchor: 0.91,
     });
 
     // 커스텀 오버레이 표시
