@@ -16,7 +16,7 @@ const ElementWrapper = styled.div`
 `
 
 const InfoWrapper = styled.div`
-
+    width: 100%;
 `
 
 const NaviWrapper = styled.div`

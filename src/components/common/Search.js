@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { searchPlaces } from "../../utils/MapSearch"
-import RadiusBtn from "./RadiusBtn";
+// import RadiusBtn from "./RadiusBtn";
 
 import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
@@ -20,7 +20,7 @@ const SearchWrapper = styled.div`
     padding: 0.5rem;
     margin-top: -0.75rem;
     margin-bottom: 0.5rem;
-    box-shadow: 3px 3px #CCCCCC;
+    box-shadow: 3px 3px rgba(204, 204, 204, 0.5);
     border: 1px solid black;
     z-index: 5;
     position: absolute;
@@ -75,7 +75,6 @@ const Search = () => {
         value={keyword} onChange={(e) => dispatch(Action.inputKeyword(e.target.value))}/>
         <SearchImage onClick={() => console.log('검색')}/>
     </SearchWrapper>
-        <RadiusBtn/>
         {/* <SearchResultWrapper>
         {
             keyword !== '' ? findSearch(keyword, placesSearchCB) : <></>
