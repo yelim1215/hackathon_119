@@ -4,7 +4,7 @@ import * as Action from "../../redux/Action";
 
 const RadiusBtnWrapper = styled.div`
     width: 95%;
-    height: 4%;
+    height: 1.5rem;
     display: flex;
     justify-content: left;
     align-items: left;
@@ -32,12 +32,13 @@ const RadiusBtnWrapper = styled.div`
 const RadiusBtnElement = styled.div`
     border: solid 1px #FF976D;
     border-radius: 1rem;
-    box-shadow: 3px 3px #CCCCCC;
+    box-shadow: 3px 3px rgba(204, 204, 204, 0.5);
     z-index: 5;
     width: 20%;
     text-align: center;
     margin-right: 0.5rem;
-    /* vertical-align: middle; */
+    font-size: 0.75rem;
+    line-height: 1.25rem;
 `
 
 const RadiusBtn = () => {
@@ -46,7 +47,7 @@ const RadiusBtn = () => {
 
     return (<RadiusBtnWrapper>
         <RadiusBtnElement className={ option === 10 ? "checked" : "unchecked" }
-            onClick={() => dispatch(Action.chooseMapScale(10))}>시/도</RadiusBtnElement>
+            onClick={() => dispatch(Action.chooseMapScale(10))}>광역시/도</RadiusBtnElement>
         <RadiusBtnElement className={option === 8 ? "checked" : "unchecked"}
             onClick={() => dispatch(Action.chooseMapScale(8))}>시/군/구</RadiusBtnElement>
         <RadiusBtnElement className={option === 6 ? "checked" : "unchecked"}
