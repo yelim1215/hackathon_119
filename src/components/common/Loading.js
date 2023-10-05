@@ -10,7 +10,3 @@ export default function Loading() {
         </div>
         )
 }
-
-const styles = styled.div`
-
-`
