@@ -28,13 +28,15 @@ const { kakao } = window;
 
 const KakaoMap = () => {
   // 현재위치 담는 곳
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
   const [map, setMap] = useState();
   const [marker, setMarker] = useState(null); // 마커 상태 추가
 
   // redux
   const dispatch = useDispatch();
   const option = useSelector(state => state.option);
+  const locCenter = useSelector(state => state.locCenter);
+  const currLoc = useSelector(state => state.currLoc);
 
   // 현재위치 세부조정
   var options = {
@@ -50,17 +52,21 @@ const KakaoMap = () => {
     }
 
     function success(position) {
-      setLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
+      dispatch(Action.currLoc(position.coords.latitude, position.coords.longitude));
+      dispatch(Action.locCenter(position.coords.latitude, position.coords.longitude));
+      // setLocation({
+      //   latitude: position.coords.latitude,
+      //   longitude: position.coords.longitude,
+      // });
     }
 
     function error() {
-      setLocation({
-        latitude: 33.450701,
-        longitude: 126.570667,
-      });
+      dispatch(Action.currLoc(33.450701, 126.570667));
+      dispatch(Action.locCenter(33.450701, 126.570667));
+      // setLocation({
+      //   latitude: 33.450701,
+      //   longitude: 126.570667,
+      // });
       console.log("위치 받기 실패");
     }
   }, [navigator.geolocation.getCurrentPosition]);
@@ -70,7 +76,7 @@ const KakaoMap = () => {
   const kakaoMap = () => {
     const container = document.getElementById("map");
     const mapOptions = {
-      center: new kakao.maps.LatLng(location.latitude, location.longitude),
+      center: new kakao.maps.LatLng(locCenter.lat, locCenter.lon),
       level: option,
     //   draggable: true, // 드래그 활성화
     //   disableDoubleClick: false, // 더블 클릭 활성화
@@ -145,7 +151,7 @@ const KakaoMap = () => {
 
     // 지도에 표시할 원 생성
     const circle = new kakao.maps.Circle({
-      center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
+      center: new kakao.maps.LatLng(locCenter.lat, locCenter.lon),  // 원의 중심좌표
       radius: 10000, // 미터 단위의 원 반지름
       strokeWeight: 1, // 선의 두께 
       strokeColor: '#3C4FFF', // 선의 색깔
@@ -168,13 +174,12 @@ const KakaoMap = () => {
   // 화면에 랜더링
   useEffect(() => {
     kakaoMap();
-    console.log(location);
-  }, [location, option]);
+  }, [locCenter, option]);
 
   return (
     <>
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-      <Gps />
+      <Gps onClick={() => { dispatch(Action.locCenter(currLoc.lat, currLoc.lon))}}/>
     </>
   );
 }

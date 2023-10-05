@@ -106,9 +106,10 @@ const Search = () => {
     }
 
     const onClickEvt = (e) => {
-        console.log(e.target.parentNode);
+        const parant = e.target.parentNode;
         dispatch(Action.inputKeyword(e.target.textContent));
         dispatch(Action.isSearchTabOpen());
+        dispatch(Action.locCenter(parseFloat(parant.getAttribute('y')), parseFloat(parant.getAttribute('x'))));
     }
 
     function displayPlaces(results, pagination) {

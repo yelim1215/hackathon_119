@@ -9,6 +9,8 @@ const initialState = {
     option: 8,
     // in: 내과, out: 외과, baby: 소아과
     searchOpt: {inhos: false, outhos: false, babyhos: false},
+    locCenter: { lat: 33.450701, lon: 126.570667 },
+    currLoc: { lat: 33.450701, lon: 126.570667 },
 }
 
 const reducers = (state = initialState, action) => {
@@ -28,7 +30,6 @@ const reducers = (state = initialState, action) => {
             }
         }
         case Action.IS_SEARCH_TAB_OPEN: {
-            console.log(state);
             return {
                 ...state,
                 isSearchTabOpen: !state.isSearchTabOpen,
@@ -64,6 +65,18 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 searchOpt: { ...state.searchOpt, babyhos: !state.searchOpt.babyhos },
+            }
+        }
+        case Action.LOC_CENTER: {
+            return {
+                ...state,
+                locCenter: {lat: action.lat, lon: action.lon},
+            }
+        }
+        case Action.CURR_LOC: {
+            return {
+                ...state,
+                currLoc: { lat: action.lat, lon: action.lon },
             }
         }
         default: {
