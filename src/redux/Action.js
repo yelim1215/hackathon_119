@@ -12,6 +12,7 @@ export const TOGGLE_OUT = 'TOGGLE_OUT'
 export const TOGGLE_BABY = 'TOGGLE_BABY'
 
 // 지도 위치 관련 상태
+export const LOC_CENTER = 'LOC_CENTER'
 export const CURR_LOC = 'CURR_LOC'
 
 // Action creators
@@ -65,6 +66,14 @@ export const toggleBaby = () => {
     }
 }
 
+export const locCenter = (lat, lon) => {
+    return {
+        type: LOC_CENTER,
+        lat: lat,
+        lon: lon,
+    }
+}
+
 export const currLoc = (lat, lon) => {
     return {
         type: CURR_LOC,
@@ -72,5 +81,4 @@ export const currLoc = (lat, lon) => {
         lon: lon,
     }
 }
-
 

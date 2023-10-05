@@ -109,7 +109,7 @@ const Search = () => {
         const parant = e.target.parentNode;
         dispatch(Action.inputKeyword(e.target.textContent));
         dispatch(Action.isSearchTabOpen());
-        dispatch(Action.currLoc(parseFloat(parant.getAttribute('y')), parseFloat(parant.getAttribute('x'))));
+        dispatch(Action.locCenter(parseFloat(parant.getAttribute('y')), parseFloat(parant.getAttribute('x'))));
     }
 
     function displayPlaces(results, pagination) {
