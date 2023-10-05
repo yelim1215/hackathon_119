@@ -28,7 +28,7 @@ const KakaoMap = () => {
     maximumAge: 0,
   };
 
-  // 현재 위치 가져오기
+  // 현재위치 가져오기
   useMemo(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, options);
@@ -113,7 +113,7 @@ const KakaoMap = () => {
           text-align: center;
           font-size: x-small;
           box-shadow: 1px 1px 5px #666;
-          margin-bottom: 80px;
+          margin-bottom: 95px;
         ">
           ${option.text}
         </div>
