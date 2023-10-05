@@ -58,7 +58,7 @@ export const CallAvail_beds = async () => {
     item.hv10 = sum(data.hvs53, data.hv21); //[응급전용] 일반격리_기준
     avail_beds.push(item);
   });
-  console.log(avail_beds);
+  // console.log(avail_beds);
   return avail_beds;
 };
 
@@ -86,6 +86,6 @@ export const CallDetails = async () => {
     item.dutyEryn = data.dutyEryn; // 응급실 운영여부 => 1 운영 , 2 운영X
     details.push(item);
   });
-  console.log(details);
+  // console.log(details);
   return details;
 };

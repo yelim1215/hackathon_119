@@ -71,11 +71,11 @@ export const Drawer = ({ flag }) => {
   useEffect(() => {
     CallDetails().then((responseData) => {
       setData(responseData);
-      console.log(responseData);
+      // console.log(responseData);
       setReady(true);
     });
   }, []);
-  console.log(data);
+  // console.log(data);
 
 
   return (
