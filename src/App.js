@@ -1,9 +1,11 @@
-import styled from 'styled-components';
-import './App.css';
-import { Logo, Search, PageToggle, List, Drawer } from './components';
-import KakaoMap from './components/map/KakaoMap';
+import styled from "styled-components";
+import "./App.css";
+import { Logo, Search, PageToggle, List, Drawer } from "./components";
+import KakaoMap from "./components/map/KakaoMap";
 
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { CallAvail_beds } from "./api_service/apiService";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -11,19 +13,27 @@ const AppWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #FFDDCE;
+  background-color: #ffddce;
 `;
 
 function App() {
   const isMap = useSelector((state) => state.isMap);
   const isTabOpen = useSelector((state) => state.isTabOpen);
-
+  useEffect(() => {
+    CallAvail_beds();
+  });
   return (
     <AppWrapper>
       <Logo />
       <Search />
-      {isMap ? <KakaoMap /> : <><List /></>}
-      <PageToggle flag={isMap}/>
+      {isMap ? (
+        <KakaoMap />
+      ) : (
+        <>
+          <List />
+        </>
+      )}
+      <PageToggle flag={isMap} />
       <Drawer flag={isTabOpen} />
     </AppWrapper>
   );

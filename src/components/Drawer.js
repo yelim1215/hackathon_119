@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import * as Action from "../redux/Action";
-import { IconImage } from './common/Icon';
-import { FirstSection, SecondSection, ThirdSection } from './Section';
-import { CallAvail_beds, CallDetails } from '../api_service/apiService';
-import { useEffect, useState } from "react"
+import { IconImage } from "./common/Icon";
+import { FirstSection, SecondSection, ThirdSection } from "./Section";
+import { CallAvail_beds } from "../api_service/apiService";
+import { useEffect, useState } from "react";
 
 const DrawerContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   width: 94%;
-  height: ${({ isOpen }) => (isOpen ? '60vh' : '0')};
+  height: ${({ isOpen }) => (isOpen ? "60vh" : "0")};
   background-color: #fff;
   transition: height 0.3s ease;
   overflow: hidden;
@@ -21,7 +21,6 @@ const DrawerContainer = styled.div`
   margin: 0 3%;
   border-radius: 30px 30px 0 0;
 `;
-
 
 // Drawer 내용
 const DrawerContent = styled.div`
@@ -34,11 +33,11 @@ const Overlay = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: ${({ isOpen }) => (isOpen ? '100%' : '0')};
+  height: ${({ isOpen }) => (isOpen ? "100%" : "0")};
   background-color: rgba(0, 0, 0, 0.3);
   transition: opacity 0.3s ease;
   z-index: 998;
-  pointer-events: ${({ isOpen }) => (isOpen ? 'auto' : 'none')};
+  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
 `;
 
 const ToggleButton = styled.button`
@@ -54,12 +53,12 @@ const ToggleButton = styled.button`
 const CustomBtn = styled.button`
   position: fixed;
   bottom: 20px;
-  left: 50%; 
+  left: 50%;
   transform: translateX(-50%);
   border: none;
   background-color: transparent;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-`
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+`;
 
 export const Drawer = ({ flag }) => {
   const dispatch = useDispatch();
@@ -67,31 +66,36 @@ export const Drawer = ({ flag }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-      CallDetails().then((responseData) => {
-          setData(responseData);
-          console.log(responseData);
-      });
-  }, []); 
+    CallAvail_beds().then((responseData) => {
+      setData(responseData);
+    });
+  }, []);
   console.log(data);
 
-return (
-  <div>
-    <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
-    <DrawerContainer isOpen={flag}>
-      <DrawerContent>
-        {/* Detail 내용 */}
-        {/* <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr}  tell={data[0].dutyTell}/> */}
-        <SecondSection text="진료과목" style={{ borderTop: '1px solid #ccc' }} />
-        <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }} />
+  return (
+    <div>
+      <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
+      <DrawerContainer isOpen={flag}>
+        <DrawerContent>
+          {/* Detail 내용 */}
+          {/* <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr}  tell={data[0].dutyTell}/> */}
+          <SecondSection
+            text='진료과목'
+            style={{ borderTop: "1px solid #ccc" }}
+          />
+          <ThirdSection
+            text='실시간병상정보'
+            style={{ borderTop: "1px solid #ccc" }}
+          />
+        </DrawerContent>
 
-      </DrawerContent>
-
-      <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
-        <IconImage style={{ width: "30px", height: "30px" }} imageUrl={"assets/cancel.png"} />
-      </CustomBtn>
-
-    </DrawerContainer>
-
-  </div>
-)
-}
+        <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
+          <IconImage
+            style={{ width: "30px", height: "30px" }}
+            imageUrl={"assets/cancel.png"}
+          />
+        </CustomBtn>
+      </DrawerContainer>
+    </div>
+  );
+};
