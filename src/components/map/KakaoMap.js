@@ -1,13 +1,28 @@
 import React, { useEffect, useState, useMemo } from "react";
-import pinImage from './pin.png';
-import currentImage from './current.png';
+import styled from "styled-components"
 import pinRedImage from './pin_red.png';
-import pinYellowImage from './pin_yellow.png';
 import pinGreenImage from './pin_green.png';
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
+
+const Gps = styled.div`
+  background-image: url(assets/current.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #FFFFFF;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  margin: 1rem 0;
+  z-index: 5;
+  top: 25%;
+  left: 85%;
+  padding: 10px;
+  border-radius: 0.3rem;
+  border: solid 0.5px #6F6F6F;
+`
 
 const { kakao } = window;
 
@@ -72,11 +87,6 @@ const KakaoMap = () => {
     const imageSizeRed = new kakao.maps.Size(35, 35); // 마커이미지의 크기
     const imageOptionRed = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
     const markerImageRed = new kakao.maps.MarkerImage(imageSrcRed, imageSizeRed, imageOptionRed);
-
-    const imageSrcCur = currentImage;
-    const imageSizeCur = new kakao.maps.Size(25, 25); // 마커이미지의 크기
-    const imageOptionCur = {offset: new kakao.maps.Point(25/2, 25)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
-    const markerImageCur = new kakao.maps.MarkerImage(imageSrcCur, imageSizeCur, imageOptionCur);
 
     // 마커 생성
     const markerOptions = [
@@ -164,6 +174,7 @@ const KakaoMap = () => {
   return (
     <>
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
+      <Gps />
     </>
   );
 }
