@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
+import * as Action from "../../redux/Action";
 
 const RadiusBtnWrapper = styled.div`
     width: 95%;
@@ -39,11 +41,18 @@ const RadiusBtnElement = styled.div`
 `
 
 const RadiusBtn = () => {
+    const radius = useSelector((state) => state.radius);
+    const dispatch = useDispatch();
+
     return (<RadiusBtnWrapper>
-        <RadiusBtnElement className={"checked"}>10km</RadiusBtnElement>
-        <RadiusBtnElement className={"unchecked"}>20km</RadiusBtnElement>
-        <RadiusBtnElement className={"unchecked"}>50km</RadiusBtnElement>
-        <RadiusBtnElement className={"unchecked"}>100km</RadiusBtnElement>
+        <RadiusBtnElement className={ radius === 10 ? "checked" : "unchecked" }
+            onClick={() => dispatch(Action.chooseRadius(10))}>10km</RadiusBtnElement>
+        <RadiusBtnElement className={radius === 20 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseRadius(20))}>20km</RadiusBtnElement>
+        <RadiusBtnElement className={radius === 50 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseRadius(50))}>50km</RadiusBtnElement>
+        <RadiusBtnElement className={radius === 100 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseRadius(100))}>100km</RadiusBtnElement>
     </RadiusBtnWrapper>);
 }
 
