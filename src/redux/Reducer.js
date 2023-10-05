@@ -3,6 +3,7 @@ import * as Action from './Action'
 const initialState = {
     isMap: true, 
     isTabOpen: false,
+    keyword: '',
 }
 
 const reducers = (state = initialState, action) => {
@@ -19,6 +20,13 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 isTabOpen: !state.isTabOpen,
+            }
+        }
+        case Action.INPUT_KEYWORD: {
+            return {
+                ...state,
+                keyword: action.keyword,
+
             }
         }
         default: {
