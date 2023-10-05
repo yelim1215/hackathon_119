@@ -112,17 +112,42 @@ const KakaoMap = () => {
         marker.setMap(mapInstance);
     });
 
-    const iwContent = `<div style="width: 100%; padding:5px; background-color: #FFB890;">Hello World!</div>`;
+    const iwContent = `
+      <div style="
+        width: auto;
+        padding: 5px;
+        background-color: #FFFFFF;
+        border: 1px solid #898989;
+        border-radius: 3px;
+        text-align: center;
+        font-size: x-small;
+        box-shadow: 1px 1px 5px #666;
+        margin-bottom: 80px;
+      ">
+        순천향대학교구미부속병원
+      </div>
+    `;
     const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
 
-    // 인포윈도우 생성
-    const infowindow = new kakao.maps.InfoWindow({
-        position : iwPosition, 
-        content : iwContent,
-    });
+    // // 인포윈도우 생성
+    // const infowindow = new kakao.maps.InfoWindow({
+    //     position : iwPosition, 
+    //     content : iwContent,
+    // });
       
-    // 마커 위에 인포윈도우 표시
-    infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
+    // // 마커 위에 인포윈도우 표시
+    // infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
+
+    // 커스텀 오버레이 생성
+    const customOverlay = new kakao.maps.CustomOverlay({
+      position: iwPosition,
+      content: iwContent,
+      // xAnchor: 0.3,
+      // yAnchor: 0.91,
+    });
+
+    // 커스텀 오버레이 표시
+    customOverlay.setMap(mapInstance, markers[0]);
 
     // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
