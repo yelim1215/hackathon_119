@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import * as Action from "../redux/Action";
 import { IconImage } from './common/Icon';
 import { FirstSection, SecondSection, ThirdSection } from './Section';
-import { CallAvail_beds, CallDetails } from '../api_service/apiService';
+import { CallAvail_beds } from '../api_service/apiService';
 import { useEffect, useState } from "react"
 import Loading from './common/Loading';
 
@@ -69,7 +69,7 @@ export const Drawer = ({ flag }) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    CallDetails().then((responseData) => {
+    CallAvail_beds().then((responseData) => {
       setData(responseData);
       console.log(responseData);
       setReady(true);
@@ -87,9 +87,9 @@ export const Drawer = ({ flag }) => {
           {/* Detail 내용 */}
           {data.length > 0 && (
             <>
-              <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tell={data[0].dutyTel1} />
-              <SecondSection text="진료과목" sub={data[0].dgidIdName} style={{ borderTop: '1px solid #ccc' }} />
-              <ThirdSection text="실시간병상정보 test"  style={{ borderTop: '1px solid #ccc' }} />
+              <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tel1={data[0].dutyTel1} tel2={data[0].dutyTel3} />
+              <SecondSection mss="있음" mss2="없음" style={{ borderTop: '1px solid #ccc' }} />
+              <ThirdSection style={{ borderTop: '1px solid #ccc' }} />
             </>
           )}
         </DrawerContent>
