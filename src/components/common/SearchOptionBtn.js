@@ -41,6 +41,26 @@ const RadiusBtnElement = styled.div`
     line-height: 1.75rem;
 `
 
+const RadiusNotification = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px #000000;
+    border-radius: 0.2rem;
+    box-shadow: 3px 3px rgba(204, 204, 204, 0.5);
+    z-index: 5;
+    width: 60%;
+    height: 20%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
 const SearchOptionBtn = () => {
     const searchOption = useSelector((state) => state.searchOpt);
     const dispatch = useDispatch();
@@ -52,6 +72,9 @@ const SearchOptionBtn = () => {
             onClick={() => dispatch(Action.toggleOut())}>외과</RadiusBtnElement>
         <RadiusBtnElement className={ searchOption.babyhos ? "checked" : "unchecked"}
             onClick={() => dispatch(Action.toggleBaby())}>소아과</RadiusBtnElement>
+        {(searchOption.inhos == false && searchOption.outhos == false && searchOption.babyhos == false
+            ? <RadiusNotification>환자의 상태를<br></br>선택해주세요</RadiusNotification>
+            : <div></div>)}
     </RadiusBtnWrapper>);
 }
 

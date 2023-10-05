@@ -1,13 +1,28 @@
 import React, { useEffect, useState, useMemo } from "react";
-import pinImage from './pin.png';
-import currentImage from './current.png';
+import styled from "styled-components"
 import pinRedImage from './pin_red.png';
-import pinYellowImage from './pin_yellow.png';
 import pinGreenImage from './pin_green.png';
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
+
+const Gps = styled.div`
+  background-image: url(assets/current.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #FFFFFF;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  margin: 1rem 0;
+  z-index: 5;
+  top: 25%;
+  left: 85%;
+  padding: 10px;
+  border-radius: 0.3rem;
+  border: solid 0.5px #6F6F6F;
+`
 
 const { kakao } = window;
 
@@ -28,7 +43,7 @@ const KakaoMap = () => {
     maximumAge: 0,
   };
 
-  // 현재 위치 가져오기
+  // 현재위치 가져오기
   useMemo(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, options);
@@ -63,32 +78,27 @@ const KakaoMap = () => {
     };
     const mapInstance = new kakao.maps.Map(container, mapOptions);
 
-    // const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소
-    const imageSrc = pinGreenImage;
-    const imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기
-    const imageOption = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    const imageSrcGreen = pinGreenImage;
+    const imageSizeGreen = new kakao.maps.Size(35, 35); // 마커이미지의 크기
+    const imageOptionGreen = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImageGreen = new kakao.maps.MarkerImage(imageSrcGreen, imageSizeGreen, imageOptionGreen);
 
-    const imageSrcCur = currentImage;
-    const imageSizeCur = new kakao.maps.Size(25, 25); // 마커이미지의 크기
-    const imageOptionCur = {offset: new kakao.maps.Point(25/2, 25)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
-    const markerImageCur = new kakao.maps.MarkerImage(imageSrcCur, imageSizeCur, imageOptionCur);
+    const imageSrcRed = pinRedImage;
+    const imageSizeRed = new kakao.maps.Size(35, 35); // 마커이미지의 크기
+    const imageOptionRed = {offset: new kakao.maps.Point(35/2, 35)}; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const markerImageRed = new kakao.maps.MarkerImage(imageSrcRed, imageSizeRed, imageOptionRed);
 
     // 마커 생성
     const markerOptions = [
         {
-          position: new kakao.maps.LatLng(location.latitude, location.longitude),
-          text: "현 위치",
-          image: markerImageCur,
+            position: new kakao.maps.LatLng(37.540651, 127.071973),
+            text: "건국대학교병원",
+            image: markerImageRed,
         },
         {
-            position: new kakao.maps.LatLng(36.103156, 128.382649),
-            text: "순천향대학교부속구미병원",
-        },
-        {
-            position: new kakao.maps.LatLng(36.114986, 128.340695),
-            text: "치의과대학교 구미차병원",
-            image: markerImage,
+            position: new kakao.maps.LatLng(37.535496, 127.083515),
+            text: "혜민병원",
+            image: markerImageGreen,
         },
     ];
     
@@ -99,58 +109,42 @@ const KakaoMap = () => {
       // 마커 클릭 이벤트 등록
       kakao.maps.event.addListener(marker, 'click', function() {
           console.log('마커가 클릭되었습니다.');
-          // 상세창으로 연결시키기
+          // 상세창으로 연결
           dispatch(Action.isTabOpen());
-          
       });
+
+      var iwContent = `
+        <div style="
+          width: auto;
+          padding: 5px;
+          background-color: #FFFFFF;
+          border: 1px solid #898989;
+          border-radius: 3px;
+          text-align: center;
+          font-size: x-small;
+          box-shadow: 1px 1px 5px #666;
+          margin-bottom: 95px;
+        ">
+          ${option.text}
+        </div>
+      `;
+
+      // 커스텀 오버레이 생성
+      var customOverlay = new kakao.maps.CustomOverlay({
+        position: option.position,
+        content: iwContent,
+      });
+
+      // 마커 표시
+      marker.setMap(mapInstance);
+      // 커스텀 오버레이 표시
+      customOverlay.setMap(mapInstance);
   
-      return marker;
+      return { marker, customOverlay };
     });
-
-    // 마커를 지도에 추가
-    markers.forEach((marker) => {
-        marker.setMap(mapInstance);
-    });
-
-    const iwContent = `
-      <div style="
-        width: auto;
-        padding: 5px;
-        background-color: #FFFFFF;
-        border: 1px solid #898989;
-        border-radius: 3px;
-        text-align: center;
-        font-size: x-small;
-        box-shadow: 1px 1px 5px #666;
-        margin-bottom: 80px;
-      ">
-        순천향대학교구미부속병원
-      </div>
-    `;
-    const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
-
-    // // 인포윈도우 생성
-    // const infowindow = new kakao.maps.InfoWindow({
-    //     position : iwPosition, 
-    //     content : iwContent,
-    // });
-      
-    // // 마커 위에 인포윈도우 표시
-    // infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
-
-    // 커스텀 오버레이 생성
-    const customOverlay = new kakao.maps.CustomOverlay({
-      position: iwPosition,
-      content: iwContent,
-      // xAnchor: 0.3,
-      // yAnchor: 0.91,
-    });
-
-    // 커스텀 오버레이 표시
-    customOverlay.setMap(mapInstance, markers[0]);
 
     // 지도에 표시할 원 생성
-    var circle = new kakao.maps.Circle({
+    const circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
       radius: 10000, // 미터 단위의 원 반지름
       strokeWeight: 1, // 선의 두께 
@@ -165,7 +159,7 @@ const KakaoMap = () => {
     circle.setMap(mapInstance); 
 
     // 마커 상태 업데이트
-    setMarker(markers);
+    setMarker(markers.map((item) => item.marker));
 
     // 지도 상태 업데이트
     setMap(mapInstance);
@@ -180,6 +174,7 @@ const KakaoMap = () => {
   return (
     <>
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
+      <Gps />
     </>
   );
 }
