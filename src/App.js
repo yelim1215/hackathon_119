@@ -5,7 +5,7 @@ import KakaoMap from "./components/map/KakaoMap";
 
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { CallAvail_beds, CallDetails } from "./api_service/apiService";
+import { CallDetails, CallAvail_beds } from "./api_service/apiService";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -23,6 +23,7 @@ function App() {
   }, []);
   const isMap = useSelector((state) => state.isMap);
   const isTabOpen = useSelector((state) => state.isTabOpen);
+
   return (
     <AppWrapper>
       <Logo />
