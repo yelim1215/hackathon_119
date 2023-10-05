@@ -6,6 +6,8 @@ import pinGreenImage from './pin_green.png';
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
+import locationService from "../../api_service/LocationService";
+import { CallAvail_beds } from "../../api_service/apiService";
 
 const Gps = styled.div`
   background-image: url(assets/current.png);
@@ -171,9 +173,14 @@ const KakaoMap = () => {
     setMap(mapInstance);
   };
 
+  const step1 = (data) => {
+    CallAvail_beds(data.sido, data.sigungu, data.lng, data.lat).then(x => console.log(x))
+  }
+
   // 화면에 랜더링
   useEffect(() => {
     kakaoMap();
+    locationService.getCurrentLocation().then(data=>step1(data));
   }, [locCenter, option]);
 
   return (
