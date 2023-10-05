@@ -5,7 +5,7 @@ import * as Action from "../../redux/Action";
 const ScaleDropdownSelect = styled.select`
     z-index: 5;
     position: absolute;
-    top: 20%;
+    top: 10%;
     right: 5%;
     height: 5%;
     width: 25%;

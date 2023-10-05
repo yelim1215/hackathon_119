@@ -19,7 +19,7 @@ const Gps = styled.div`
   position: absolute;
   margin: 1rem 0;
   z-index: 5;
-  top: 25%;
+  top: 15%;
   left: 85%;
   padding: 10px;
   border-radius: 0.3rem;

@@ -15,7 +15,7 @@ const RadiusBtnWrapper = styled.div`
     border: 1px solid black; */
     z-index: 5;
     position: absolute;
-    top: 20%;
+    top: 10%;
 
     > .unchecked {
         background-color: white;

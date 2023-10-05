@@ -20,7 +20,7 @@ function App() {
 
   return (
     <AppWrapper>
-      <Logo />    
+      {/* <Logo />     */}
       {isMap ? <><Search /><SearchOptionBtn />
         <ScaleDropdown /><KakaoMap /></> : <><Search /><List /></>}
       <PageToggle flag={isMap}/>

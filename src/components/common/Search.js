@@ -22,7 +22,7 @@ const SearchWrapper = styled.div`
     border: 1px solid black;
     z-index: 10;
     position: absolute;
-    top: 15%;
+    top: 5%;
 
     > .disappear {
         display: none;
