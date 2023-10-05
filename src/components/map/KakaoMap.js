@@ -112,7 +112,7 @@ const KakaoMap = () => {
     });
 
     const iwContent = `<div style="width: 100%; padding:5px; background-color: #FFB890;">Hello World!</div>`;
-    const iwPosition = new kakao.maps.LatLng(36.103156, 128.382649);
+    const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
 
     // 인포윈도우 생성
     const infowindow = new kakao.maps.InfoWindow({
@@ -122,8 +122,6 @@ const KakaoMap = () => {
       
     // 마커 위에 인포윈도우 표시
     infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
-
-    
 
     // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
