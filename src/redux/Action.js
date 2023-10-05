@@ -4,7 +4,7 @@ export const IS_TAB_OPEN = 'IS_TAB_OPEN'
 
 export const INPUT_KEYWORD = 'INPUT_KEYWORD'
 
-export const CHOOSE_RADIUS = 'CHOOSE_RADIUS'
+export const CHOOSE_MAP_SCALE = 'CHOOSE_MAP_SCALE'
 
 // Action creators
 export const isMap = () => {
@@ -26,10 +26,10 @@ export const inputKeyword = (kw) => {
     }
 }
 
-export const chooseRadius = (r) => {
+export const chooseMapScale = (opt) => {
     return {
-        type: CHOOSE_RADIUS,
-        radius: r,
+        type: CHOOSE_MAP_SCALE,
+        option: opt,
     }
 }
 
