@@ -6,6 +6,11 @@ export const INPUT_KEYWORD = 'INPUT_KEYWORD'
 
 export const CHOOSE_MAP_SCALE = 'CHOOSE_MAP_SCALE'
 
+// 검색옵션 선택
+export const TOGGLE_IN = 'TOGGLE_IN'
+export const TOGGLE_OUT = 'TOGGLE_OUT'
+export const TOGGLE_BABY = 'TOGGLE_BABY'
+
 // Action creators
 export const isMap = () => {
     return {
@@ -26,10 +31,29 @@ export const inputKeyword = (kw) => {
     }
 }
 
-export const chooseMapScale = (opt) => {
+export const chooseMapScale = (r) => {
     return {
         type: CHOOSE_MAP_SCALE,
-        option: opt,
+        option: r,
     }
 }
+
+export const toggleIn = () => {
+    return {
+        type: TOGGLE_IN,
+    }
+}
+
+export const toggleOut = () => {
+    return {
+        type: TOGGLE_OUT,
+    }
+}
+
+export const toggleBaby = () => {
+    return {
+        type: TOGGLE_BABY,
+    }
+}
+
 
