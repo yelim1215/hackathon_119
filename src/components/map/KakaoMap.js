@@ -19,7 +19,7 @@ const KakaoMap = () => {
 
   // redux
   const dispatch = useDispatch();
-  const radius = useSelector(state => state.radius);
+  const option = useSelector(state => state.option);
 
   // 현재위치 세부조정
   var options = {
@@ -50,12 +50,13 @@ const KakaoMap = () => {
     }
   }, [navigator.geolocation.getCurrentPosition]);
 
+  
   // 카카오지도 API 가져오기
   const kakaoMap = () => {
     const container = document.getElementById("map");
     const mapOptions = {
       center: new kakao.maps.LatLng(location.latitude, location.longitude),
-      level: 9,
+      level: option,
     //   draggable: true, // 드래그 활성화
     //   disableDoubleClick: false, // 더블 클릭 활성화
     //   disableTouchZoom: false, // 터치 제스처 활성화
@@ -126,7 +127,7 @@ const KakaoMap = () => {
     // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
-      radius: 1000 * radius, // 미터 단위의 원 반지름
+      radius: 10000, // 미터 단위의 원 반지름
       strokeWeight: 1, // 선의 두께 
       strokeColor: '#3C4FFF', // 선의 색깔
       strokeOpacity: 0.7, // 선의 불투명도 1~0 사이의 값. 0에 가까울수록 투명
@@ -149,7 +150,7 @@ const KakaoMap = () => {
   useEffect(() => {
     kakaoMap();
     console.log(location);
-  }, [location, radius]);
+  }, [location, option]);
 
   return (
     <>

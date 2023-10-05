@@ -34,25 +34,23 @@ const RadiusBtnElement = styled.div`
     border-radius: 1rem;
     box-shadow: 3px 3px #CCCCCC;
     z-index: 5;
-    width: 15%;
+    width: 20%;
     text-align: center;
     margin-right: 0.5rem;
     /* vertical-align: middle; */
 `
 
 const RadiusBtn = () => {
-    const radius = useSelector((state) => state.radius);
+    const option = useSelector((state) => state.option);
     const dispatch = useDispatch();
 
     return (<RadiusBtnWrapper>
-        <RadiusBtnElement className={ radius === 10 ? "checked" : "unchecked" }
-            onClick={() => dispatch(Action.chooseRadius(10))}>10km</RadiusBtnElement>
-        <RadiusBtnElement className={radius === 20 ? "checked" : "unchecked"}
-            onClick={() => dispatch(Action.chooseRadius(20))}>20km</RadiusBtnElement>
-        <RadiusBtnElement className={radius === 50 ? "checked" : "unchecked"}
-            onClick={() => dispatch(Action.chooseRadius(50))}>50km</RadiusBtnElement>
-        <RadiusBtnElement className={radius === 100 ? "checked" : "unchecked"}
-            onClick={() => dispatch(Action.chooseRadius(100))}>100km</RadiusBtnElement>
+        <RadiusBtnElement className={ option === 10 ? "checked" : "unchecked" }
+            onClick={() => dispatch(Action.chooseMapScale(10))}>시/도</RadiusBtnElement>
+        <RadiusBtnElement className={option === 8 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseMapScale(8))}>시/군/구</RadiusBtnElement>
+        <RadiusBtnElement className={option === 6 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseMapScale(6))}>읍/면/동</RadiusBtnElement>
     </RadiusBtnWrapper>);
 }
 
