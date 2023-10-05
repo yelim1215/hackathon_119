@@ -20,7 +20,7 @@ const SearchWrapper = styled.div`
     padding: 0.5rem;
     margin-top: -0.75rem;
     margin-bottom: 0.5rem;
-    box-shadow: 3px 3px #CCCCCC;
+    box-shadow: 3px 3px rgba(204, 204, 204, 0.5);
     border: 1px solid black;
     z-index: 5;
     position: absolute;
