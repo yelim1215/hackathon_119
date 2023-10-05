@@ -81,11 +81,6 @@ const KakaoMap = () => {
     // 마커 생성
     const markerOptions = [
         {
-          position: new kakao.maps.LatLng(location.latitude, location.longitude),
-          text: "현 위치",
-          image: markerImageCur,
-        },
-        {
             position: new kakao.maps.LatLng(37.540651, 127.071973),
             text: "건국대학교병원",
             image: markerImageRed,
