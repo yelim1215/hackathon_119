@@ -104,47 +104,42 @@ const KakaoMap = () => {
       // 마커 클릭 이벤트 등록
       kakao.maps.event.addListener(marker, 'click', function() {
           console.log('마커가 클릭되었습니다.');
-          // 상세창으로 연결시키기
+          // 상세창으로 연결
           dispatch(Action.isTabOpen());
-          
       });
+
+      var iwContent = `
+        <div style="
+          width: auto;
+          padding: 5px;
+          background-color: #FFFFFF;
+          border: 1px solid #898989;
+          border-radius: 3px;
+          text-align: center;
+          font-size: x-small;
+          box-shadow: 1px 1px 5px #666;
+          margin-bottom: 80px;
+        ">
+          ${option.text}
+        </div>
+      `;
+
+      // 커스텀 오버레이 생성
+      var customOverlay = new kakao.maps.CustomOverlay({
+        position: option.position,
+        content: iwContent,
+      });
+
+      // 마커 표시
+      marker.setMap(mapInstance);
+      // 커스텀 오버레이 표시
+      customOverlay.setMap(mapInstance);
   
-      return marker;
+      return { marker, customOverlay };
     });
-
-    // 마커를 지도에 추가
-    markers.forEach((marker) => {
-        marker.setMap(mapInstance);
-    });
-
-    const iwContent = `
-      <div style="
-        width: auto;
-        padding: 5px;
-        background-color: #FFFFFF;
-        border: 1px solid #898989;
-        border-radius: 3px;
-        text-align: center;
-        font-size: x-small;
-        box-shadow: 1px 1px 5px #666;
-        margin-bottom: 80px;
-      ">
-        순천향대학교구미부속병원
-      </div>
-    `;
-    const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
-
-    // 커스텀 오버레이 생성
-    const customOverlay = new kakao.maps.CustomOverlay({
-      position: iwPosition,
-      content: iwContent,
-    });
-
-    // 커스텀 오버레이 표시
-    customOverlay.setMap(mapInstance, markers[0]);
 
     // 지도에 표시할 원 생성
-    var circle = new kakao.maps.Circle({
+    const circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
       radius: 10000, // 미터 단위의 원 반지름
       strokeWeight: 1, // 선의 두께 
@@ -159,7 +154,7 @@ const KakaoMap = () => {
     circle.setMap(mapInstance); 
 
     // 마커 상태 업데이트
-    setMarker(markers);
+    setMarker(markers.map((item) => item.marker));
 
     // 지도 상태 업데이트
     setMap(mapInstance);
