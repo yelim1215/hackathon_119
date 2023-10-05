@@ -2,26 +2,27 @@ import styled from "styled-components"
 
 const IconContainer = styled.div`
   display: inline-block;
-  margin: 1rem;
+  margin: 5%;
   justify-self: center;
+  border: 0.5px dashed gray;
+  padding: 5%;
+  border-radius: 10px;
+  width: 80%;
 `
 
 export const IconImage = styled.div`
   background-image: url(${(props) => props.imageUrl});
   background-repeat: no-repeat;
-  background-size: contain; /* 이미지를 fit하게 설정 */
-  width: 72px; 
-  height: 72px;
+  background-size: contain;
+  width: 30px; 
+  height: 30px;
+  margin-left: 35%;
 `
 
 const IconText = styled.div`
   margin-top: 0.5rem;
   text-align: center;
   font-size: 14px;
-`
-
-const CustomBar = styled.progress`
-  width: -webkit-fill-available;
 `
 
 const BarNumDiv = styled.div`
@@ -38,15 +39,13 @@ const BarNum = styled.p`
 `
 
 
-const Icon = ({ imageUrl, text }) => {
-    return (
-        <IconContainer>
-            <IconImage imageUrl={imageUrl} />
-            <IconText>{text}</IconText>
-            <CustomBar value="70" min="0" max="100" />
-            <BarNumDiv><BarNum>0</BarNum><BarNum>10</BarNum></BarNumDiv>
-        </IconContainer>
-    );
+const Icon = ({ imageUrl, text, hb  }) => {
+  return (
+      <IconContainer>
+          <IconImage imageUrl={imageUrl} />
+          <IconText>{text}</IconText>
+          <IconText><h3>잔여병상 {hb}</h3></IconText>
+      </IconContainer>
+  );
 }
-
 export default Icon;
