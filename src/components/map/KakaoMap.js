@@ -112,7 +112,6 @@ const KakaoMap = () => {
         marker.setMap(mapInstance);
     });
 
-<<<<<<< HEAD
     const iwContent = `
       <div style="
         width: auto;
@@ -128,9 +127,6 @@ const KakaoMap = () => {
         순천향대학교구미부속병원
       </div>
     `;
-=======
-    const iwContent = `<div style="width: 100%; padding:5px; background-color: #FFB890;">Hello World!</div>`;
->>>>>>> f5e3101 (지도 센터 호출 오류 해결)
     const iwPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
 
     // // 인포윈도우 생성
@@ -142,7 +138,6 @@ const KakaoMap = () => {
     // // 마커 위에 인포윈도우 표시
     // infowindow.open(mapInstance, markers[0]); // 표시할 마커 임시 지정
 
-<<<<<<< HEAD
     // 커스텀 오버레이 생성
     const customOverlay = new kakao.maps.CustomOverlay({
       position: iwPosition,
@@ -154,8 +149,6 @@ const KakaoMap = () => {
     // 커스텀 오버레이 표시
     customOverlay.setMap(mapInstance, markers[0]);
 
-=======
->>>>>>> f5e3101 (지도 센터 호출 오류 해결)
     // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
