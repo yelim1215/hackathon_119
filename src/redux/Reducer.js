@@ -3,6 +3,8 @@ import * as Action from './Action'
 const initialState = {
     isMap: true, 
     isTabOpen: false,
+    keyword: '',
+    radius: 10,
 }
 
 const reducers = (state = initialState, action) => {
@@ -19,6 +21,20 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 isTabOpen: !state.isTabOpen,
+            }
+        }
+        case Action.INPUT_KEYWORD: {
+            return {
+                ...state,
+                keyword: action.keyword,
+
+            }
+        }
+        case Action.CHOOSE_RADIUS: {
+            return {
+                ...state,
+                radius: action.radius,
+
             }
         }
         default: {

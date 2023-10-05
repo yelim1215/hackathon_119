@@ -4,6 +4,11 @@ import currentImage from './current.png';
 import pinRedImage from './pin_red.png';
 import pinYellowImage from './pin_yellow.png';
 import pinGreenImage from './pin_green.png';
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import * as Action from "../../redux/Action";
+
 const { kakao } = window;
 
 const KakaoMap = () => {
@@ -11,6 +16,10 @@ const KakaoMap = () => {
   const [location, setLocation] = useState("");
   const [map, setMap] = useState();
   const [marker, setMarker] = useState(null); // 마커 상태 추가
+
+  // redux
+  const dispatch = useDispatch();
+  const radius = useSelector(state => state.radius);
 
   // 현재위치 세부조정
   var options = {
@@ -90,6 +99,8 @@ const KakaoMap = () => {
       kakao.maps.event.addListener(marker, 'click', function() {
           console.log('마커가 클릭되었습니다.');
           // 상세창으로 연결시키기
+          dispatch(Action.isTabOpen());
+          
       });
   
       return marker;
@@ -115,7 +126,7 @@ const KakaoMap = () => {
     // 지도에 표시할 원 생성
     var circle = new kakao.maps.Circle({
       center : new kakao.maps.LatLng(location.latitude, location.longitude),  // 원의 중심좌표
-      radius: 10000, // 미터 단위의 원 반지름
+      radius: 1000 * radius, // 미터 단위의 원 반지름
       strokeWeight: 1, // 선의 두께 
       strokeColor: '#3C4FFF', // 선의 색깔
       strokeOpacity: 0.7, // 선의 불투명도 1~0 사이의 값. 0에 가까울수록 투명
@@ -138,7 +149,7 @@ const KakaoMap = () => {
   useEffect(() => {
     kakaoMap();
     console.log(location);
-  }, [location]);
+  }, [location, radius]);
 
   return (
     <>
