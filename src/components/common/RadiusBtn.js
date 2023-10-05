@@ -46,6 +46,8 @@ const RadiusBtn = () => {
     const dispatch = useDispatch();
 
     return (<RadiusBtnWrapper>
+        <RadiusBtnElement className={option === 13 ? "checked" : "unchecked"}
+            onClick={() => dispatch(Action.chooseMapScale(13))}>전국</RadiusBtnElement>
         <RadiusBtnElement className={ option === 10 ? "checked" : "unchecked" }
             onClick={() => dispatch(Action.chooseMapScale(10))}>광역시/도</RadiusBtnElement>
         <RadiusBtnElement className={option === 8 ? "checked" : "unchecked"}
