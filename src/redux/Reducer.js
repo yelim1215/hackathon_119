@@ -4,7 +4,8 @@ const initialState = {
     isMap: true, 
     isTabOpen: false,
     keyword: '',
-    radius: 10,
+    // 10: 시/도, 8: 시/군/구, 6: 읍/면/동
+    option: 8,
 }
 
 const reducers = (state = initialState, action) => {
@@ -30,10 +31,10 @@ const reducers = (state = initialState, action) => {
 
             }
         }
-        case Action.CHOOSE_RADIUS: {
+        case Action.CHOOSE_MAP_SCALE: {
             return {
                 ...state,
-                radius: action.radius,
+                option: action.option,
 
             }
         }
