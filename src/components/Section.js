@@ -8,12 +8,28 @@ padding: 16px;
 
 const IconSection = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 한 줄에 세 개의 아이콘 */
-
+  grid-template-columns: repeat(3, 1fr);
   
 `
 
-export const FirstSection = ({ name, addr, tel1, tel2}) => {
+const CustomH4 = styled.h4`
+  margin: 1%;
+  text-align-last: center;
+  border-bottom: 1px solid #ccc;
+`
+
+const SectionBox = styled.div`
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+`
+
+const Box2 = styled.div`
+  display: inline;
+`
+
+export const FirstSection = ({ name, addr, tel1, tel2 }) => {
 
     return (<>
         <Section>
@@ -28,18 +44,33 @@ export const FirstSection = ({ name, addr, tel1, tel2}) => {
 export const SecondSection = ({ mss, mss2 }) => {
     return (<>
         <Section style={{ borderTop: '1px solid #ccc' }}>
-            <h3>실시간 의료진 현황</h3>
-            <h4>내과</h4>
-            <p>심장내과 <strong>{mss}</strong></p>
-            <p>호흡기내과 <strong>{mss2}</strong></p>
+            <h3>
+                실시간 의료진 현황
+                <span style={{ fontSize: "x-small", fontWeight: "350", margin: "2px" }}>
+                    * 응급도가 높은 특정 과만 표시
+                </span>
+            </h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridColumnGap: "10px", gridRowGap: "10px" }}>
+                <SectionBox>
+                    <CustomH4>내과</CustomH4>
+                    <Box2>
+                    <p>심장내과 <strong>{mss}</strong></p>
+                    </Box2>
+                    <Box2>
+                    <p>호흡기내과 <strong>{mss2}</strong></p>
+                    </Box2>
+                </SectionBox>
+                <SectionBox>
+                    <CustomH4>외과</CustomH4>
+                    <p>흉부외과 <strong>{mss2}</strong></p>
+                    <p>신경외과 <strong>{mss}</strong></p>
+                </SectionBox>
+                <SectionBox>
+                    <CustomH4>소아과</CustomH4>
+                    <p>소아과 <strong>{mss}</strong></p>
+                </SectionBox>
+            </div>
 
-            <h4>외과</h4>
-            <p>흉부외과 <strong>{mss2}</strong></p>
-            <p>신경외과 <strong>{mss}</strong></p>
-            <p>산부인과 <strong>{mss2}</strong></p>
-
-            <h4>소아과</h4>
-            <p><strong>{mss}</strong></p>
         </Section>
     </>)
 }
@@ -47,7 +78,7 @@ export const SecondSection = ({ mss, mss2 }) => {
 
 export const ThirdSection = ({ text }) => {
     return (<>
-        <Section style={{ borderTop: '1px solid #ccc' }}>
+        <Section style={{ borderTop: '1px solid #ccc', borderBottom: '1px' }}>
             <h3>실시간 병상 현황</h3>
         </Section>
         <IconSection>

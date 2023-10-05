@@ -85,7 +85,7 @@ export const Drawer = ({ flag }) => {
             {data.length > 0 && (
               <>
                 <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tel1={data[0].dutyTel1} tel2={data[0].dutyTel3} />
-                <SecondSection mss="있음" mss2="없음" style={{ borderTop: '1px solid #ccc' }} />
+                <SecondSection mss="O" mss2="X" style={{ borderTop: '1px solid #ccc' }} />
                 <ThirdSection style={{ borderTop: '1px solid #ccc' }} />
               </>
             )}
