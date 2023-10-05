@@ -21,15 +21,30 @@ const IconText = styled.div`
 `
 
 const CustomBar = styled.progress`
-width: -webkit-fill-available;
+  width: -webkit-fill-available;
 `
+
+const BarNumDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 0px;
+`
+
+const BarNum = styled.p`
+  display: inline;
+  line-height: 0px;
+  margin-top: 3.5px;
+  font-size: xx-small;
+`
+
 
 const Icon = ({ imageUrl, text }) => {
     return (
         <IconContainer>
             <IconImage imageUrl={imageUrl} />
             <IconText>{text}</IconText>
-            <CustomBar value="50" min="0" max="100" />
+            <CustomBar value="70" min="0" max="100" />
+            <BarNumDiv><BarNum>0</BarNum><BarNum>10</BarNum></BarNumDiv>
         </IconContainer>
     );
 }

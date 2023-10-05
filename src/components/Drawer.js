@@ -6,6 +6,7 @@ import { IconImage } from './common/Icon';
 import { FirstSection, SecondSection, ThirdSection } from './Section';
 import { CallAvail_beds, CallDetails } from '../api_service/apiService';
 import { useEffect, useState } from "react"
+import Loading from './common/Loading';
 
 const DrawerContainer = styled.div`
   position: fixed;
@@ -53,8 +54,8 @@ const ToggleButton = styled.button`
 
 const CustomBtn = styled.button`
   position: fixed;
-  bottom: 20px;
-  left: 50%; 
+  bottom: 50%;
+  left: 90%; 
   transform: translateX(-50%);
   border: none;
   background-color: transparent;
@@ -65,33 +66,39 @@ export const Drawer = ({ flag }) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-      CallDetails().then((responseData) => {
-          setData(responseData);
-          console.log(responseData);
-      });
-  }, []); 
+    CallDetails().then((responseData) => {
+      setData(responseData);
+      console.log(responseData);
+      setReady(true);
+    });
+  }, []);
   console.log(data);
 
-return (
-  <div>
-    <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
-    <DrawerContainer isOpen={flag}>
-      <DrawerContent>
-        {/* Detail 내용 */}
-        {/* <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr}  tell={data[0].dutyTell}/> */}
-        <SecondSection text="진료과목" style={{ borderTop: '1px solid #ccc' }} />
-        <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }} />
 
-      </DrawerContent>
+  return (
+     <div>
+      <Overlay isOpen={flag} onClick={() => dispatch(Action.isTabOpen())} />
+      <DrawerContainer isOpen={flag}>
+      { ready ? 
+        <DrawerContent>
+          {/* Detail 내용 */}
+          {data.length > 0 && (
+            <>
+              <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tell={data[0].dutyTell} />
+              <SecondSection text="진료과목" style={{ borderTop: '1px solid #ccc' }} />
+              <ThirdSection text="실시간병상정보" style={{ borderTop: '1px solid #ccc' }} />
+            </>
+          )}
+        </DrawerContent>
+        : <Loading /> }
 
-      <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
-        <IconImage style={{ width: "30px", height: "30px" }} imageUrl={"assets/cancel.png"} />
-      </CustomBtn>
-
-    </DrawerContainer>
-
-  </div>
-)
+        <CustomBtn isOpen={flag} onClick={() => dispatch(Action.isTabOpen())}>
+          <IconImage style={{ width: '30px', height: '30px' }} imageUrl="assets/cancel.png" />
+        </CustomBtn>
+      </DrawerContainer>
+    </div> 
+  ) 
 }
