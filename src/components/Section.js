@@ -54,10 +54,10 @@ export const SecondSection = ({ mss, mss2 }) => {
                 <SectionBox>
                     <CustomH4>내과</CustomH4>
                     <Box2>
-                    <p>심장내과 <strong>{mss}</strong></p>
+                        <p>심장내과 <strong>{mss}</strong></p>
                     </Box2>
                     <Box2>
-                    <p>호흡기내과 <strong>{mss2}</strong></p>
+                        <p>호흡기내과 <strong>{mss2}</strong></p>
                     </Box2>
                 </SectionBox>
                 <SectionBox>
@@ -76,19 +76,19 @@ export const SecondSection = ({ mss, mss2 }) => {
 }
 
 
-export const ThirdSection = ({ text }) => {
+export const ThirdSection = ({ a1, a2, a3, a4, a5, a6, a7 }) => {
     return (<>
         <Section style={{ borderTop: '1px solid #ccc', borderBottom: '1px' }}>
             <h3>실시간 병상 현황</h3>
         </Section>
         <IconSection>
-            <Icon imageUrl={"assets/hospital.png"} text={"응급실"} hb={"5"} />
-            <Icon imageUrl={"assets/surgery.png"} text={"수술실"} hb={"3"} />
-            <Icon imageUrl={"assets/quarantine.png"} text={"음압격리병상"} hb={"9"} />
-            <Icon imageUrl={"assets/ICU.png"} text={"외과중환자실"} hb={"2"} />
-            <Icon imageUrl={"assets/ICU.png"} text={"내과중환자실"} hb={"6"} />
-            <Icon imageUrl={"assets/ICU.png"} text={"정형외과중환자실"} hb={"5"} />
-            <Icon imageUrl={"assets/baby.png"} text={"응급실소아병상"} hb={"5"} />
+            <Icon imageUrl={"assets/hospital.png"} text={"응급실"} hb={a1} />
+            <Icon imageUrl={"assets/surgery.png"} text={"수술실"} hb={a2} />
+            <Icon imageUrl={"assets/quarantine.png"} text={"음압격리병상"} hb={a3} />
+            <Icon imageUrl={"assets/ICU.png"} text={"외과중환자실"} hb={a4} />
+            <Icon imageUrl={"assets/ICU.png"} text={"내과중환자실"} hb={a5} />
+            <Icon imageUrl={"assets/ICU.png"} text={"정형외과중환자실"} hb={a6} />
+            <Icon imageUrl={"assets/baby.png"} text={"응급실소아병상"} hb={a7} />
         </IconSection>
     </>)
 }

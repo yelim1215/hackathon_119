@@ -43,8 +43,8 @@ export const CallAvail_beds = async (city, district, lon, lat) => {
       item.dutyTel1 = temp.dutyTel1; //대표전화
       item.dutyTel3 = temp.dutyTel3; //응급실전화 (없으면 응급실 X)
       item.dutyAddr = temp.dutyAddr; // 주소
-      // item.wgs84Lon = Number(temp.wgs84Lon); // 병원 위도
-      // item.wgs84Lat = Number(temp.wgs84Lat); // 병원 경도
+      item.wgs84Lon = Number(temp.wgs84Lon); // 병원 위도
+      item.wgs84Lat = Number(temp.wgs84Lat); // 병원 경도
       item.standard = distance(
         Number(temp.wgs84Lat),
         Number(temp.wgs84Lon),

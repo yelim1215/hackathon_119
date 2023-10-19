@@ -7,6 +7,7 @@ import { FirstSection, SecondSection, ThirdSection } from './Section';
 import { CallAvail_beds } from '../api_service/apiService';
 import { useEffect, useState } from "react"
 import Loading from './common/Loading';
+import { sigunguSort } from '../data/dummy';
 
 const DrawerContainer = styled.div`
   position: fixed;
@@ -62,18 +63,28 @@ const CustomBtn = styled.button`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 `
 
-export const Drawer = ({ flag }) => {
+export const Drawer = ({ flag, idx }) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
   const [ready, setReady] = useState(false);
 
+  idx = 0;
+
+  // useEffect(() => {
+  //   CallAvail_beds().then((responseData) => {
+  //     setData(responseData);
+  //     setReady(true);
+
+  //   });
+  // }, []);
+  // console.log(data);
+
   useEffect(() => {
-    CallAvail_beds().then((responseData) => {
-      setData(responseData);
-      setReady(true);
-    });
+    setData(sigunguSort);
+    setReady(true);
   }, []);
+  console.log(data);
 
   return (
     <div>
@@ -84,9 +95,9 @@ export const Drawer = ({ flag }) => {
             {/* Detail 내용 */}
             {data.length > 0 && (
               <>
-                <FirstSection name={data[0].dutyname} addr={data[0].dutyAddr} tel1={data[0].dutyTel1} tel2={data[0].dutyTel3} />
+                <FirstSection name={data[idx].dutyname} addr={data[idx].dutyAddr} tel1={data[idx].dutyTel1} tel2={data[idx].dutyTel3} />
                 <SecondSection mss="O" mss2="X" style={{ borderTop: '1px solid #ccc' }} />
-                <ThirdSection style={{ borderTop: '1px solid #ccc' }} />
+                <ThirdSection a1={data[idx].hv1} a2={data[idx].hv2} a3={data[idx].hv3} a4={data[idx].hv4} a5={data[idx].hv5} a6={data[idx].hv6} a7={data[idx].hv7} style={{ borderTop: '1px solid #ccc' }} />
               </>
             )}
           </DrawerContent>

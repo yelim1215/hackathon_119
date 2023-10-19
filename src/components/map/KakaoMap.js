@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../../redux/Action";
 import locationService from "../../api_service/LocationService";
 import { CallAvail_beds } from "../../api_service/apiService";
+import { sidoSort, sigunguSort, sigunguOut } from "../../data/dummy";
 
 const Gps = styled.div`
   background-image: url(assets/current.png);
@@ -37,9 +38,11 @@ const KakaoMap = () => {
   // redux
   const dispatch = useDispatch();
   const option = useSelector(state => state.option);
+  const searchOpt = useSelector(state => state.searchOpt);
   const locCenter = useSelector(state => state.locCenter);
   const currLoc = useSelector(state => state.currLoc);
 
+  console.log(searchOpt, searchOpt.outhos);
   // 현재위치 세부조정
   var options = {
     enableHighAccuracy: true,
@@ -97,18 +100,48 @@ const KakaoMap = () => {
     const markerImageRed = new kakao.maps.MarkerImage(imageSrcRed, imageSizeRed, imageOptionRed);
 
     // 마커 생성
-    const markerOptions = [
-        {
-            position: new kakao.maps.LatLng(37.540651, 127.071973),
-            text: "건국대학교병원",
+    // const markerOptions = [
+    //     {
+    //         position: new kakao.maps.LatLng(37.540651, 127.071973),
+    //         text: "건국대학교병원",
+    //         image: markerImageRed,
+    //     },
+    //     {
+    //         position: new kakao.maps.LatLng(37.535496, 127.083515),
+    //         text: "혜민병원",
+    //         image: markerImageGreen,
+    //     },
+    // ];
+
+
+    let markerOptions = [];
+    if (searchOpt.outhos) {
+      markerOptions = [{
+        position: new kakao.maps.LatLng(37.54084479467721, 127.0721229093036),
+        text: "건국대학교병원",
+        image: markerImageRed,
+      }];
+    } else {
+      if (option === 8) {
+        sigunguSort.map(ele => markerOptions.push(
+          {
+            position: new kakao.maps.LatLng(ele.wgs84Lat, ele.wgs84Lon),
+            text: ele.dutyname,
             image: markerImageRed,
-        },
-        {
-            position: new kakao.maps.LatLng(37.535496, 127.083515),
-            text: "혜민병원",
-            image: markerImageGreen,
-        },
-    ];
+          }
+        ))
+      } else {
+        sidoSort.map(ele => markerOptions.push(
+          {
+            position: new kakao.maps.LatLng(ele.wgs84Lat, ele.wgs84Lon),
+            text: ele.dutyname,
+            image: markerImageRed,
+          }
+        ))
+      }
+    }
+
+    
     
     // const markerInstance = new kakao.maps.Marker(markerOptions);
     const markers = markerOptions.map((option) => {
@@ -173,15 +206,15 @@ const KakaoMap = () => {
     setMap(mapInstance);
   };
 
-  const step1 = (data) => {
-    CallAvail_beds(data.sido, data.sigungu, data.lng, data.lat).then(x => console.log(x))
-  }
+  // const step1 = (data) => {
+  //   CallAvail_beds("경상북도", "구미시", data.lng, data.lat).then(x => console.log(x))
+  // }
 
   // 화면에 랜더링
   useEffect(() => {
     kakaoMap();
-    locationService.getCurrentLocation().then(data=>step1(data));
-  }, [locCenter, option]);
+    // locationService.getCurrentLocation().then(data=>step1(data));
+  }, [locCenter, option, searchOpt]);
 
   return (
     <>

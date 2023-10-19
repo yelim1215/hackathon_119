@@ -16,8 +16,6 @@ export default function List() {
     return (<>
         <ListWrapper>
             <ListElement />
-            <ListElement />
-            <ListElement />
         </ListWrapper>
     </>)
 }
